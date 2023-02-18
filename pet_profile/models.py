@@ -20,6 +20,7 @@ class PetPhoto(models.Model):
     url = models.URLField(max_length = 200, primary_key = True, null = False, blank = False)
     title = models.TextField(max_length = 200)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
+    photo = models.ImageField()
 
 #any number of pet stories per pet
 class PetStory(models.Model):
