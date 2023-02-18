@@ -6,6 +6,7 @@ class PetOwner(models.Model):
     name = models.TextField(max_length = 200)
     age = models.IntegerField()
     location = models.TextField(max_length = 200)
+    profile_photo = models.ImageField(blank = True)
 
 #one pet per pet
 class Pet(models.Model):
