@@ -2,7 +2,7 @@ from django.db import models
 
 #any number of pet owners per pet
 class PetOwner(models.Model):
-    slug = models.SlugField(max_length = 200, primary_key = True, null = True, blank = False)
+    slug = models.SlugField(max_length = 200, primary_key = True, blank = False)
     name = models.TextField(max_length = 200)
     age = models.IntegerField()
     location = models.TextField(max_length = 200)
@@ -10,7 +10,7 @@ class PetOwner(models.Model):
 
 #one pet per pet
 class Pet(models.Model):
-    slug = models.SlugField(max_length = 200, primary_key = True, null = True, blank = False)
+    slug = models.SlugField(max_length = 200, primary_key = True, blank = False)
     name = models.TextField(max_length = 200)
     age = models.IntegerField()
     owner = models.ForeignKey(PetOwner, on_delete=models.CASCADE)
