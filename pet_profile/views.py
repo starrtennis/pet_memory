@@ -4,26 +4,34 @@ from django.views.generic import (TemplateView,ListView,
                                   UpdateView,DeleteView)
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
 
+class PetOwnerListView(ListView):
+    model = PetOwner
+    context_object_name = "owner_list"
+
 class PetOwnerProfileView(DetailView):
     model = PetOwner
-    template_name = "pet_owner_profile.html"
+    context_object_name = "owner"
+
+class PetListView(ListView):
+    model = Pet
+    context_object_name = "pet_list"
 
 class PetDetailView(DetailView):
     model = Pet
-    template_name = "pet_profile.html"
+    context_object_name = "pet"
 
 class PetPhotoListView(ListView):
     model = PetPhoto
-    template_name = "pet_profile.html"
+    context_object_name = "pet_photo_list"
 
 class PetPhotoDetailView(DetailView):
     model = PetPhoto
-    template_name = "pet_photo_detail.html"
+    context_object_name = "pet_photo"
 
 class PetStoryListView(ListView):
     model = PetStory
-    template_name = "pet_profile.html"
+    context_object_name = "pet_story_list"
 
 class PetStoryDetailView(DetailView):
     model = PetStory
-    template_name = "pet_story_detail.html"
+    context_object_name = "pet_story"

@@ -3,12 +3,6 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-    {{ petowner.name }}
-    {% for photo in petphotolist %}
-        {{ petphotolist.photo }}
-    {% endfor %}
-    {% for story in petstorylist %}
-        {{ petstorylist.title }}
-        {{ petstorylist.content }}
-    {% endfor %}
+    {{ owner.name }}
+    
 {% endblock %}

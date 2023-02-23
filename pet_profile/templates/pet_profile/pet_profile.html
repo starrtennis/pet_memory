@@ -2,8 +2,11 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-    this is the pet profile page
-    it should eventually contain a gallery of the pet's photos
-    a bio of the owner
-    and a collection of stories (anecdotes) of the pet
+    {% for photo in petphoto_list %}
+        {{ petphoto_list.photo }}
+    {% endfor %}
+    {% for story in petstory_list %}
+        {{ petstory_list.title }}
+        {{ petstory_list.content }}
+    {% endfor %}
 {% endblock %}
