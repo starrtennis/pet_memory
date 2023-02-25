@@ -7,10 +7,12 @@ from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
 class PetOwnerListView(ListView):
     model = PetOwner
     context_object_name = "owner_list"
+    template_name = "home.html"
 
 class PetOwnerProfileView(DetailView):
     model = PetOwner
     context_object_name = "owner"
+    template_name = "pet_owner_profile.html"
 
 class PetListView(ListView):
     model = Pet
