@@ -4,14 +4,14 @@ import uuid
 from django.urls import reverse
 
 ANIMALTYPE_CHOICES = (
-    ('the one that barks','dog'),
-    ('the one that meows', 'cat'),
-    ('the one that eats crickets','lizard'),
-    ('the one that slithers','snake'),
-    ('the one that hops','rabbit/bunny'),
-    ('the one that flaps','bird'),
-    ('the one that swims','fish'),
-    ('the one that croaks','frog'),
+    ('dog', 'the one that barks'),
+    ('cat', 'the one that meows'),
+    ('lizard', 'the one that eats crickets'),
+    ('snake', 'the one that slithers'),
+    ('rabbit/bunny', 'the one that hops'),
+    ('bird', 'the one that flaps'),
+    ('fish', 'the one that swims'),
+    ('frog', 'the one that croaks'),
 )
 
 class Pet(models.Model):

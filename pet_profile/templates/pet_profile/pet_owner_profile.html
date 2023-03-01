@@ -2,5 +2,14 @@
 {% block header %}
 {% endblock %}
 {% block content %}
-    {{ owner.name }}    
+    {{ owner.name }}
+    {{ owner.age }}
+    {{ owner.location }}
+    {{ owner.profile_photo }}
+    {% for pet in owner.pets.all %}
+        {{ pet.name }}
+        {{ pet.animaltype }}
+        {{ pet.age }}
+        {{ pet.profile_photo }}
+    {% endfor %}
 {% endblock %}
