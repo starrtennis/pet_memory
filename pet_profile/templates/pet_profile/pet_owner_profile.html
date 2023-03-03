@@ -10,6 +10,8 @@
         {{ pet.name }}
         {{ pet.animaltype }}
         {{ pet.age }}
-        {{ pet.profile_photo }}
+        {% for pet2, photo in pet_photos %}
+            <img src="{{ photo.photo }}">
+        {% endfor %}
     {% endfor %}
 {% endblock %}

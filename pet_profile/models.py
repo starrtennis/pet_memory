@@ -70,6 +70,9 @@ def slug_save(obj):
 def get_ID(obj):
     obj.id = obj.name + '-' + obj.slug
 
+def get_ID2(obj):
+    obj.id = obj.title + '-' + obj.slug
+
 
 
 class PetPhoto(models.Model):
@@ -81,7 +84,7 @@ class PetPhoto(models.Model):
 
     def save(self, *args, **kwargs):  # new
         slug_save(self)
-        get_ID(self)
+        get_ID2(self)
         return super().save(*args, **kwargs)
 
     def __str__(self):

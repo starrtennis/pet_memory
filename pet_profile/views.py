@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import (TemplateView,ListView,
-                                  DetailView,CreateView,
-                                  UpdateView,DeleteView)
+from django.views.generic import (ListView,
+                                  DetailView)
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
 
 class PetOwnerListView(ListView):
