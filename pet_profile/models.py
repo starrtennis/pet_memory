@@ -3,6 +3,38 @@ from django.utils.crypto import get_random_string
 import uuid
 from django.urls import reverse
 
+class PetPhoto(models.Model):
+    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
+    title = models.CharField(max_length = 255)
+    id = models.CharField(max_length = 261, default=uuid.uuid1)
+    photo = models.ImageField(blank = False)
+
+    def save(self, *args, **kwargs):  # new
+        slug_save(self)
+        get_ID2(self)
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+
+class PetStory(models.Model):
+    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
+    title = models.CharField(max_length = 255)
+    content = models.TextField(max_length = 1000)
+    
+    def save(self, *args, **kwargs):  # new
+        slug_save(self)
+        get_ID(self)
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "PetStories"
+
+
 ANIMALTYPE_CHOICES = (
     ('dog', 'the one that barks'),
     ('cat', 'the one that meows'),
@@ -20,6 +52,8 @@ class Pet(models.Model):
     id = models.CharField(max_length = 261, unique = True, default = uuid.uuid1)
     animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
     age = models.PositiveIntegerField()
+    pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)
+    pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)
 
     def save(self, *args, **kwargs):  # new
         slug_save(self)
@@ -72,38 +106,3 @@ def get_ID(obj):
 
 def get_ID2(obj):
     obj.id = obj.title + '-' + obj.slug
-
-
-
-class PetPhoto(models.Model):
-    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
-    title = models.CharField(max_length = 255)
-    id = models.CharField(max_length = 261, default=uuid.uuid1)
-    pet = models.ManyToManyField(Pet, related_name = "Pet_Photos")
-    photo = models.ImageField(blank = False)
-
-    def save(self, *args, **kwargs):  # new
-        slug_save(self)
-        get_ID2(self)
-        return super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.title
-
-
-class PetStory(models.Model):
-    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
-    title = models.CharField(max_length = 255)
-    content = models.TextField(max_length = 1000)
-    pet = models.ManyToManyField(Pet)
-
-    def save(self, *args, **kwargs):  # new
-        slug_save(self)
-        get_ID(self)
-        return super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name_plural = "PetStories"

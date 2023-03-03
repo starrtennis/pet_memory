@@ -10,8 +10,9 @@
         {{ pet.name }}
         {{ pet.animaltype }}
         {{ pet.age }}
-        {% for pet2, photo in pet_photos %}
-            <img src="{{ photo.photo }}">
+        <!-- context['pet_photos'] = {pet1: [photo1, photo2, photo3], pet2: [photo1, photo2]} -->
+        {% for photo in pet_photos.pet.photos %}
+            <img src = "{{ photo.photo.url }}">
         {% endfor %}
     {% endfor %}
 {% endblock %}
