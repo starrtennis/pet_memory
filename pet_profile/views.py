@@ -9,29 +9,26 @@ class PetOwnerListView(ListView):
     template_name = "home.html"
 
     
-def all_pet_photos(request):
-    pets = Pet.objects.all()
-    pet_data = {}
-    for pet in pets:
-        pet_data[pet] = PetPhoto.objects.filter(pets=pet)
-    context = {'pet_data': pet_data}
-    return render(request, 'pet_owner_profile.html', context)
+# def all_pet_photos(request):
+#     pets = Pet.objects.all()
+#     pet_data = {}
+#     for pet in pets:
+#         pet_data[pet] = PetPhoto.objects.filter(pets=pet)
+#     context = {'pet_data': pet_data}
+#     return render(request, 'pet_owner_profile.html', context)
 
 class PetOwnerDetailView(DetailView):
     model = PetOwner
     context_object_name = "owner"
     template_name = "pet_owner_profile.html"
-
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['pet_photos'] = {}
-    #     pets = PetOwner.objects.filter(name = "pets")
-    #     for pet in pets:
-    #         context['pet_photos'][pet] = []
-    #         for photo in pet.pet_photos:
-    #             context['pet_photos'][pet] += photo
-    #     # context['pet_photos'] = {pet1: [photo1, photo2, photo3], pet2: [photo1, photo2]}
-    #     return context
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pets = Pet.objects.all()
+        pet_data = {}
+        for pet in pets:
+            pet_data[pet] = PetPhoto.objects.filter(pets=pet)
+        context['pet_data'] = pet_data
+        return context
 
 class PetListView(ListView):
     model = Pet
