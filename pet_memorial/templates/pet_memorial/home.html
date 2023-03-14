@@ -4,5 +4,17 @@
 {% block content %}
     {% for pet_owner in pet_owners %}
         <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.name }}</a>
+        <table>
+            {% for pet in pet_owner.pets.all %}
+                <tr>
+                    <td>{{ pet.name }}</td>
+                    <td>{{ pet.age }}</td>
+                    <td>{{ pet.animaltype }}</td>
+                    <td>breed</td>
+                    <td>photo gallery icons thumbnails or list view?</td>
+                    <td>stories gallery thumbnails or list view?</td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endfor %}
 {% endblock %}
