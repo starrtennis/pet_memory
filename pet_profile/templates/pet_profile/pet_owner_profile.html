@@ -12,11 +12,11 @@
         {{ pet.age }}
         <!-- context['pet_photos'] = {pet1: [photo1, photo2, photo3], pet2: [photo1, photo2]} -->
         <h1>{{ pet.name }} Photos</h1>
-        {% for pet, photos in pet_data.items %}
+        {% for pet, pet_photos in pet_data.items %}
             <h2>{{ pet.name }}</h2>
-            {% for photo in photos %}
-                {{ photo.photo.url }}
-                <img src="{{ photo.photo.url }}" alt="{{ photo.title }}">
+            {% for pet_photo in pet_photos %}
+                {{ pet_photo.photo.url }}
+                <img src="{{ pet_photo.photo.url }}" alt="{{ pet_photo.title }}">
             {% endfor %}
         {% endfor %}
     {% endfor %}
