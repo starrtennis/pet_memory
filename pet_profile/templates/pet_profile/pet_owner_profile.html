@@ -17,7 +17,7 @@
             <h2>{{ pet.name }}</h2>
             {% for pet_photo in pet_photos %}
                 {{ pet_photo.photo.url }}
-                <img src="{% static pet_photo.photo.url %}" alt="{{ pet_photo.title }}">
+                <img src="{{ pet_photo.photo.url }}" alt="{{ pet_photo.title }}">
             {% endfor %}
         {% endfor %}
     {% endfor %}
