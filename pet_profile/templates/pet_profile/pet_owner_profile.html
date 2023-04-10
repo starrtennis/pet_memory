@@ -2,6 +2,7 @@
 {% block header %}
 {% endblock %}
 {% block content %}
+{% load static %}
     {{ owner.name }}
     {{ owner.age }}
     {{ owner.location }}
@@ -16,7 +17,7 @@
             <h2>{{ pet.name }}</h2>
             {% for pet_photo in pet_photos %}
                 {{ pet_photo.photo.url }}
-                <img src="{{ pet_photo.photo.url }}" alt="{{ pet_photo.title }}">
+                <img src="{% static pet_photo.photo.url %}" alt="{{ pet_photo.title }}">
             {% endfor %}
         {% endfor %}
     {% endfor %}
