@@ -9,5 +9,3 @@ urlpatterns = [
     path('home/', views.HomeView.as_view(), name='home_view'),
     path('', include('pet_profile.urls')),
 ]
-urlpatterns+=static(settings.STATIC_URL,
-                    document_root=settings.STATIC_ROOT)
