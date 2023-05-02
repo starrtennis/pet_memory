@@ -4,4 +4,4 @@ class PhotoUploadForm(forms.Form):
     pet_img = forms.ImageField()
 
 class StoryUploadForm(forms.Form):
-    yield
+    pet_story = forms.CharField()

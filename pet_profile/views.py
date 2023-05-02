@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import (ListView,
-                                  DetailView)
+                                  DetailView, FormView)
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
+from pet_profile.forms import PhotoUploadForm
 
 class PetOwnerListView(ListView):
     model = PetOwner
@@ -37,6 +38,10 @@ class PetListView(ListView):
 class PetDetailView(DetailView):
     model = Pet
     context_object_name = "pet"
+
+class PetPhotoUploadView(FormView):
+    template_name = "photo_upload.html"
+    form_class = PhotoUploadForm
 
 class PetPhotoListView(ListView):
     model = PetPhoto

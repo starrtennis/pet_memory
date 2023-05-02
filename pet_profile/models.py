@@ -106,3 +106,5 @@ def get_ID(obj):
 
 def get_ID2(obj):
     obj.id = obj.title + '-' + obj.slug
+
+    
