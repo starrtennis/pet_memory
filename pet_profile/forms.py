@@ -5,3 +5,9 @@ class PhotoUploadForm(forms.Form):
 
 class StoryUploadForm(forms.Form):
     pet_story = forms.CharField()
+
+class AccountCreationForm(forms.Form):
+    pass
+
+class UpdateForm(forms.Form):
+    pass
