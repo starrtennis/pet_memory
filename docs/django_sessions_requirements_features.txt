@@ -1,0 +1,81 @@
+what do you want the browser to "remember"
+from visit to visit?
+
+request.session['key'] = 'value'
+
+or object value or whatever data
+
+remember candidates
+user name (but not yet logged in?)
+pets (but not yet logged in? without logging in/ anonymously?)
+photos
+stories
+
+basic user data of pet memorial
+
+blah blah blah cache better not local
+redis memcached (cache apis?)
+
+cache based vs file based sessions vs cookie based sessions
+
+some parameters (get_expire_at_browser_close() set_expiry() flush() etc.) utility usage for session management
+
+what does "session management" mean?
+
+secret key leak immediately escalates to arbitrary code execution vulnerability (in Django) --> BAD
+
+by default django serilizaes sessiom data jusing JSON
+
+other serializer is python's Pickle
+
+you can also write your own serializer (not recommended)
+
+examples
+
+def post_comment(request, new_comment):
+    if request.session.get("has_commented", False):
+        return HttpResponse("You've already commented.")
+    c = comments.Comment(comment=new_comment)
+    c.save()
+    request.session["has_commented"] = True
+    return HttpResponse("Thanks for your comment!")
+
+
+
+def login(request):
+    m = Member.objects.get(username=request.POST["username"])
+    if m.check_password(request.POST["password"]):
+        request.session["member_id"] = m.id
+        return HttpResponse("You're logged in.")
+    else:
+        return HttpResponse("Your username and password didn't match.")
+
+
+
+def logout(request):
+    try:
+        del request.session["member_id"]
+    except KeyError:
+        pass
+    return HttpResponse("You're logged out.")
+
+
+
+Django doesn't provide automatic purging of expired sessions
+The session in database mode is automatically deleted if the user logs out manually. But if they just close their browser it doesn't.
+
+Note Log Out! when you're leaving a signed in website on your client browser
+
+Session Security
+cookies can be set for the whole domain from any subdomain
+
+session data is stored in a database table named django_session
+
+django only sets cookies if it needs to. if you don't set any session data it won't
+
+you can extend database-based session engines by your classes
+
+no session ids in urls unless you explicitly code it that way
+(don't--bulnerable to attark)
+
+..
