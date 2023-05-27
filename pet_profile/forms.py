@@ -7,12 +7,12 @@ class StoryUploadForm(forms.Form):
     pet_story = forms.CharField()
 
 class AccountCreationForm(forms.Form):
-    account_name = forms.CharField
-    account_owner = forms.CharField
-    destruction_date = forms.DateField  #should the destruction date be a date field?
-    physical_location = forms.ChoiceField
-    contact_method = forms.CharField
-    
+    account_name = forms.CharField()
+    account_owner = forms.CharField()
+    account_destruction_date = forms.DateField()  #should the destruction date be a date field?
+    physical_user_location = forms.ChoiceField()
+    owner_contact_method = forms.CharField()
+    owner_age = forms.IntegerField()
 
 class UpdateForm(forms.Form):
     pass
