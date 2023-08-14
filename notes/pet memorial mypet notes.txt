@@ -1,0 +1,22 @@
+09Aug2023
+-----------
+Pet Memorial / MyPet website
+people (users) post about their pet
+the pet has a profile
+people love teir pets so will drive traffic
+
+no pet profile equals easier
+just post ad hoc
+
+design method for ad hoc posting
+
+no account
+
+use django data storage methods
+
+combine best componenets of pet memorial and mypet, easier and more efficient to code
+
+design before code
+
+figma?
+or just paper and pencil

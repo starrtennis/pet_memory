@@ -44,7 +44,7 @@ ANIMALTYPE_CHOICES = (
     ('bird', 'the one that flaps'),
     ('fish', 'the one that swims'),
     ('frog', 'the one that croaks'),
-)
+) #figure out how user enters their own pet type
 
 class Pet(models.Model):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
@@ -55,7 +55,7 @@ class Pet(models.Model):
     pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)
     pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)
 
-    def save(self, *args, **kwargs):  # new
+    def save(self, *args, **kwargs):
         slug_save(self)
         get_ID(self)
         return super().save(*args, **kwargs)
@@ -99,8 +99,10 @@ def slug_save(obj):
             #    slug_is_wrong = True
             if slug_is_wrong:
                 # create another slug and check it again
-                obj.slug = get_random_string(5)
+                #obj.slug = get_random_string(5)
 
+
+#make sure you mimic that hash technique
 def get_ID(obj):
     obj.id = obj.name + '-' + obj.slug
 
