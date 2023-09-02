@@ -7,4 +7,6 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['pet_owners'] = PetOwner.objects.all()
         return context
+        
+        #use context processor class? metaclass?
 

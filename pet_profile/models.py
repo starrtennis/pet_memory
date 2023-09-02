@@ -7,7 +7,7 @@ class PetPhoto(models.Model):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
     id = models.CharField(max_length = 261, default=uuid.uuid1)
-    photo = models.ImageField(blank = False)
+    photo = models.ImageField(blank = False, upload_to='media')
 
     def save(self, *args, **kwargs):  # new
         slug_save(self)
@@ -99,10 +99,10 @@ def slug_save(obj):
             #    slug_is_wrong = True
             if slug_is_wrong:
                 # create another slug and check it again
-                #obj.slug = get_random_string(5)
+                obj.slug = get_random_string(5)
 
 
-#make sure you mimic that hash technique
+#make sure you mimic that hash technique #ambiguous pronoun--abuse of English language
 def get_ID(obj):
     obj.id = obj.name + '-' + obj.slug
 
