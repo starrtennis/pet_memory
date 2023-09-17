@@ -20,8 +20,9 @@ class Pet(models.Model):
     id = models.CharField(max_length = 261, unique = True, default = uuid.uuid1)
     animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
     age = models.PositiveIntegerField()
-    pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)
-    pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)
+    #pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)#change the many to many location to PetPhoto, so it can access Pet, which is already defined
+    #I don't understand why this code is interpreted instead of compiled
+    #pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)#same here
 
     def save(self, *args, **kwargs):
         slug_save(self)
@@ -56,6 +57,7 @@ class PetPhoto(models.Model):
     title = models.CharField(max_length = 255)
     id = models.CharField(max_length = 261, default=uuid.uuid1)
     photo = models.ImageField(blank = False, upload_to='media')
+    pets = models.ManyToManyField(Pet)
 
     def save(self, *args, **kwargs):  # new
         slug_save(self)
@@ -69,6 +71,7 @@ class PetStory(models.Model):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
     content = models.TextField(max_length = 1000)
+    pets = models.ManyToManyField(Pet)
     
     def save(self, *args, **kwargs):  # new
         slug_save(self)
