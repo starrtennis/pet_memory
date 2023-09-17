@@ -12,6 +12,7 @@ class AccountCreationForm(forms.Form):
         ("Email", "Email"),
         ("Snailmail", "Snailmail"),
         ("Find me", "Find me"),
+        ("I'm trendy, I use social media", "Social media"),
     )
     account_name = forms.CharField()
     account_owner = forms.CharField()

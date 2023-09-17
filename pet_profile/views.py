@@ -21,12 +21,12 @@ class PetOwnerDetailView(DetailView):
     model = PetOwner
     context_object_name = "owner"
     template_name = "pet_owner_profile.html"
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, *args, **kwargs): #is a system function (common to what class of Views?); being overriden
         context = super().get_context_data(**kwargs)
         pets = Pet.objects.all()
         pet_data = {}
         for pet in pets:
-            pet_data[pet] = PetPhoto.objects.filter(pets=pet)
+            pet_data[pet] = PetPhoto.objects.filter(pets=pet) #Why do I have to inform the context? Why cannot access directly as needed?
         context['pet_data'] = pet_data
         return context
 
