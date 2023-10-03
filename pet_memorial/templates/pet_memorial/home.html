@@ -21,4 +21,7 @@
             {% endfor %}
         </table>
     {% endfor %}
+	{% for pet_photo in pet_photos %}
+		<img src="{{ pet_photo.url }}">
+    {% endfor %}
 {% endblock %}
