@@ -59,14 +59,24 @@ class CustomUserManager(BaseUserManager):
         user.save()
         return user
 
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+        return self.create_user(email, password, **extra_fields)
 
-class User(AbstractUser):
+
+class PetOwner(AbstractUser):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
     name = models.CharField(max_length = 255)
-    age = models.PositiveIntegerField()
+    age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
-    pets = models.ForeignKey(Pet, related_name = "Owners", on_delete=models.CASCADE)
+    pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
     objects = CustomUserManager()
 
     def get_absolute_url(self):
