@@ -1,7 +1,10 @@
-from django.db import models
-from django.utils.crypto import get_random_string
 import uuid
+
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import BaseUserManager
 from django.urls import reverse
+from django.utils.crypto import get_random_string
 
 ANIMALTYPE_CHOICES = (
     ('dog', 'the one that barks'),
@@ -12,14 +15,43 @@ ANIMALTYPE_CHOICES = (
     ('bird', 'the one that flaps'),
     ('fish', 'the one that swims'),
     ('frog', 'the one that croaks'),
+    ('other', 'other')
 ) #figure out how user enters their own pet type #probably define a function that accepts input of some sort to do that
+
+class CustomUserManager(BaseUserManager):
+    """To use email instead of username"""
+
+    def create_user(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError('Email is required')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
+
+        
+class User(AbstractUser):
+    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
+    name = models.CharField(max_length = 255)
+    age = models.PositiveIntegerField()
+    location = models.CharField(max_length = 255)
+    profile_photo = models.ImageField(blank = True)
+    pets = models.(Pet, related_name = "Owners")
+    objects = CustomUserManager()
+
+    def get_absolute_url(self):
+        return reverse("owner_profile", kwargs={"slug": self.slug})  
+
+    def __str__(self):
+        return self.name
 
 class Pet(models.Model):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
     name = models.CharField(max_length = 255, unique = False)
-    id = models.CharField(max_length = 261, unique = True, default = uuid.uuid1)
     animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
     age = models.PositiveIntegerField()
+    pet_photos = models.ForeignKey(PetPhoto, null=True, blank=True, on_delete=models.CASCADE)
     #pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)#change the many to many location to PetPhoto, so it can access Pet, which is already defined
     #I don't understand why this code is interpreted instead of compiled
     #pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)#same here
@@ -31,52 +63,23 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.name
-        
-class PetOwner(models.Model):
-    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
-    name = models.CharField(max_length = 255)
-    id = models.CharField(max_length = 261, unique = True, default=uuid.uuid1)
-    age = models.PositiveIntegerField()
-    location = models.CharField(max_length = 255)
-    profile_photo = models.ImageField(blank = True)
-    pets = models.ManyToManyField(Pet, related_name = "Owners")
 
-    def get_absolute_url(self):
-        return reverse("owner_profile", kwargs={"slug": self.slug})  
-
-    def save(self, *args, **kwargs):  # new
-        slug_save(self)
-        get_ID(self)
-        return super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
 
 class PetPhoto(models.Model):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
-    id = models.CharField(max_length = 261, default=uuid.uuid1)
     photo = models.ImageField(blank = False, upload_to='media')
     pets = models.ManyToManyField(Pet)
 
-    def save(self, *args, **kwargs):  # new
-        slug_save(self)
-        get_ID2(self)
-        return super().save(*args, **kwargs)
-
     def __str__(self):
         return self.title
+
 
 class PetStory(models.Model):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
     content = models.TextField(max_length = 1000)
     pets = models.ManyToManyField(Pet)
-    
-    def save(self, *args, **kwargs):  # new
-        slug_save(self)
-        get_ID(self)
-        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -102,10 +105,5 @@ def slug_save(obj):
                 # create another slug and check it again
                 obj.slug = get_random_string(5)
 
-def get_ID(obj):
-    obj.id = obj.name + '-' + obj.slug
-
-def get_ID2(obj):
-    obj.id = obj.title + '-' + obj.slug
 
     
