@@ -18,33 +18,15 @@ ANIMALTYPE_CHOICES = (
     ('other', 'other')
 ) #figure out how user enters their own pet type #probably define a function that accepts input of some sort to do that
 
-class CustomUserManager(BaseUserManager):
-    """To use email instead of username"""
 
-    def create_user(self, email, password, **extra_fields):
-        if not email:
-            raise ValueError('Email is required')
-        email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-        user.set_password(password)
-        user.save()
-        return user
-
-        
-class User(AbstractUser):
+class PetPhoto(models.Model):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
-    name = models.CharField(max_length = 255)
-    age = models.PositiveIntegerField()
-    location = models.CharField(max_length = 255)
-    profile_photo = models.ImageField(blank = True)
-    pets = models.(Pet, related_name = "Owners")
-    objects = CustomUserManager()
-
-    def get_absolute_url(self):
-        return reverse("owner_profile", kwargs={"slug": self.slug})  
+    title = models.CharField(max_length = 255)
+    photo = models.ImageField(blank = False, upload_to='media')
 
     def __str__(self):
-        return self.name
+        return self.title
+
 
 class Pet(models.Model):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
@@ -65,14 +47,33 @@ class Pet(models.Model):
         return self.name
 
 
-class PetPhoto(models.Model):
+class CustomUserManager(BaseUserManager):
+    """To use email instead of username"""
+
+    def create_user(self, email, password, **extra_fields):
+        if not email:
+            raise ValueError('Email is required')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
+
+
+class User(AbstractUser):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
-    title = models.CharField(max_length = 255)
-    photo = models.ImageField(blank = False, upload_to='media')
-    pets = models.ManyToManyField(Pet)
+    name = models.CharField(max_length = 255)
+    age = models.PositiveIntegerField()
+    location = models.CharField(max_length = 255)
+    profile_photo = models.ImageField(blank = True)
+    pets = models.ForeignKey(Pet, related_name = "Owners", on_delete=models.CASCADE)
+    objects = CustomUserManager()
+
+    def get_absolute_url(self):
+        return reverse("owner_profile", kwargs={"slug": self.slug})  
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class PetStory(models.Model):

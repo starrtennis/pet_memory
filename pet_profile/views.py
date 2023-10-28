@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView, CreateView
-from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
+from pet_profile.models import User, Pet, PetPhoto, PetStory
 from pet_profile.forms import PhotoUploadForm
 
-class PetOwnerListView(ListView):
-    model = PetOwner
+class UserListView(ListView):
+    model = User
     context_object_name = "owner_list"
     template_name = "home.html"
 
@@ -17,8 +17,8 @@ class PetOwnerListView(ListView):
 #     context = {'pet_data': pet_data}
 #     return render(request, 'pet_owner_profile.html', context)
 
-class PetOwnerDetailView(DetailView):
-    model = PetOwner
+class UserDetailView(DetailView):
+    model = User
     context_object_name = "owner"
     template_name = "pet_owner_profile.html"
     def get_context_data(self, *args, **kwargs): #is a system function (common to what class of Views?); being overriden

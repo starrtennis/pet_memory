@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #3rd parties
+    'bootstrap5',
+
+    #own modules
     'pet_profile'
 ]
 
@@ -125,5 +130,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = "pet_profile.User"
 
 
