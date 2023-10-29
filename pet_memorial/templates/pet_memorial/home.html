@@ -7,7 +7,7 @@
 {% endblock %}
 {% block content %}
     {% for pet_owner in pet_owners %}
-        <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.name }}</a>
+        <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.first_name }}</a>
         <table>
             {% for pet in pet_owner.pets.all %}
                 <tr>

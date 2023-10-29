@@ -38,10 +38,10 @@ class Pet(models.Model):
     #I don't understand why this code is interpreted instead of compiled
     #pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)#same here
 
-    def save(self, *args, **kwargs):
-        slug_save(self)
-        get_ID(self)
-        return super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     slug_save(self)
+    #     get_ID(self)
+    #     return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -72,7 +72,6 @@ class CustomUserManager(BaseUserManager):
 
 class PetOwner(AbstractUser):
     slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
-    name = models.CharField(max_length = 255)
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
