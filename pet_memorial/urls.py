@@ -11,5 +11,5 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    print("YES")
+    print("DEBUG MODE ON")
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
