@@ -4,10 +4,12 @@
 {% endblock %}
 {% block content %}
 {% load static %}
-    {{ owner.name }}
-    {{ owner.age }}
-    {{ owner.location }}
-    {{ owner.profile_photo }}
+    <h2>{{ owner.name }}</h2>
+    <h3>{{ owner.age }}</h3>
+    <h2>{{ owner.location }}</h2>
+    <p>{{ owner.profile_photo }}</p>
+
+    <div class="owner-img"><img src="{{ owner.profile_photo.url }}" alt="{{ owner.profile_photo }}"></div>
     {% for pet in owner.pets.all %}
         {{ pet.name }}
         {{ pet.animaltype }}

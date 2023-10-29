@@ -1,0 +1,19 @@
+body {
+    /* color: red; */
+}
+
+h1 {
+    color: brown;
+}
+
+h2 {
+    color: #003eaacf;
+}
+
+.owner-img {
+    max-width: 250px;
+    max-height: 250px;
+    img {
+        width: -webkit-fill-available;
+    }
+}
