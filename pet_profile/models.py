@@ -20,7 +20,7 @@ ANIMALTYPE_CHOICES = (
 
 
 class PetPhoto(models.Model):
-    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
+    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
     photo = models.ImageField(blank = False, upload_to='media')
 
@@ -29,7 +29,7 @@ class PetPhoto(models.Model):
 
 
 class Pet(models.Model):
-    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
+    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     name = models.CharField(max_length = 255, unique = False)
     animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
     age = models.PositiveIntegerField()
@@ -71,7 +71,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class PetOwner(AbstractUser):
-    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
+    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
@@ -86,7 +86,7 @@ class PetOwner(AbstractUser):
 
 
 class PetStory(models.Model):
-    slug = models.SlugField(max_length = 5, primary_key = True, blank = True, null=False)
+    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
     content = models.TextField(max_length = 1000)
     pets = models.ManyToManyField(Pet)
