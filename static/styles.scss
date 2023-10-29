@@ -1,5 +1,5 @@
 body {
-    color: red;
+    /* color: red; */
 }
 
 h1 {
@@ -13,4 +13,7 @@ h2 {
 .owner-img {
     max-width: 250px;
     max-height: 250px;
+    img {
+        width: -webkit-fill-available;
+    }
 }
