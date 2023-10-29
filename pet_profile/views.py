@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, FormView, CreateView
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
 from pet_profile.forms import PhotoUploadForm
 
-class UserListView(ListView):
+class PetOwnerListView(ListView):
     model = PetOwner
     context_object_name = "owner_list"
     template_name = "home.html"
@@ -17,7 +17,7 @@ class UserListView(ListView):
 #     context = {'pet_data': pet_data}
 #     return render(request, 'pet_owner_profile.html', context)
 
-class UserDetailView(DetailView):
+class PetOwnerDetailView(DetailView):
     model = PetOwner
     context_object_name = "owner"
     template_name = "pet_owner_profile.html"
