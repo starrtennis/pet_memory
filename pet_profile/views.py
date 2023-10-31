@@ -26,7 +26,7 @@ class PetOwnerDetailView(DetailView):
         pets = Pet.objects.all()
         pet_data = {}
         for pet in pets:
-            pet_data[pet] = PetPhoto.objects.filter(pet=pet) #Why do I have to inform the context? Why cannot access directly as needed?
+            pet_data[pet] = PetPhoto.objects.filter(pet=pet)
         context['pet_data'] = pet_data
         return context
 
