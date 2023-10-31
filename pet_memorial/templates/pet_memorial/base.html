@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 {% load static %}
 {% load compress %}
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
 <html>
 	<head>
 		<!-- <link rel="stylesheet" type="text/css" href="{% static 'styles.scss' %}">  -->
 		<link rel="shortcut icon" type="image/ico" href="{% static 'img/favicon.ico' %}">
+		<link type="text/css" href="{% static 'headers.css' %}" rel="stylesheet" media="screen">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&display=swap" rel="stylesheet">
 		{% compress css %}
 			<link type="text/x-scss" href="{% static 'styles.scss' %}" rel="stylesheet" media="screen">
 		{% endcompress %}
@@ -12,6 +25,29 @@
 		{% endblock %}
 	</head>
 	<body>
+		<header class="px-4 pt-3 pb-0 mb-3 bg-dark text-white d-flex flex-wrap justify-content-between border-bottom">		
+			<div class="d-flex pb-3">
+				<ul class="nav align-items-end col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+					<li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+					<li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+					<li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+					<li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+					<li><a href="#" class="nav-link px-2 text-white">About</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<a class="ml-4" href="/">
+					<img class="header-img" src="{% static 'img/download_no_bg.png' %}" alt="pet-img">
+				</a>
+				<h2 class="font-darling">Pet Memory</h2>
+			</div>
+		
+			<div class="d-flex align-items-end pb-3">
+				<button type="button" class="btn btn-outline-light me-2">Login</button>
+				<button type="button" class="btn btn-warning">Sign-up</button>
+			</div>
+		</header>
 		{% block content %}
 		{% endblock %}
     </body>
