@@ -1,10 +1,13 @@
 from django import forms
 
+
 class PhotoUploadForm(forms.Form):
     pet_img = forms.ImageField()
 
+
 class StoryUploadForm(forms.Form):
     pet_story = forms.CharField()
+
 
 class AccountCreationForm(forms.Form):
     CONTACT_METHOD_CHOICES = (
@@ -21,6 +24,7 @@ class AccountCreationForm(forms.Form):
     owner_contact_method = forms.ChoiceField(choices=CONTACT_METHOD_CHOICES)
     owner_contact_information = forms.CharField()
     owner_age = forms.IntegerField()
+
 
 class UpdateForm(forms.Form):
     pass
