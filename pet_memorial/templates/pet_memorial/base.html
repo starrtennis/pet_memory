@@ -43,21 +43,26 @@
 				<h2 class="header-tittle">Pet Memory</h2>
 			</div>
 		
-			<div class="d-flex align-items-end pb-3">
-				{% if user.is_authenticated %}
+			{% if user.is_authenticated %}
+				<div class="d-flex flex-column justify-content-end">
 					<p style="color: rgb(214, 188, 40);">YOU'RE LOGGED</p>
-					<a href="{% url 'logout' %}">
-						<p style="color: rgb(210, 94, 21);font-weight: bold;">LOG OUT HERE</p>
+					<p>
+						<a style="color: rgb(210, 94, 21);font-weight: bold;" href=" {% url 'logout' %}">LOG OUT HERE</a>
+					</p>
+				</div>
+			{% else %}
+				<div class="d-flex align-items-end pb-3">
+					<a href="{% url 'login' %}">
+						<button type="button" class="btn btn-outline-light me-2">Login</button>
 					</a>
-				{% else %}
-				<a href="{% url 'login' %}">
-					<button type="button" class="btn btn-outline-light me-2">Login</button>
-				</a>
-				<button type="button" class="btn btn-warning">Sign-up</button>
-				{% endif %}
-			</div>
+					<button type="button" class="btn btn-warning">Sign-up</button>
+				</div>
+			{% endif %}
 		</header>
 		{% block content %}
 		{% endblock %}
+
+		{% block codigojs %}
+		{% endblock codigojs %}
     </body>
 </html>
