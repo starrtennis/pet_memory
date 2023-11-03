@@ -1,7 +1,7 @@
 09Aug2023
 -----------
 Pet Memorial / MyPet website
-people (users) post about their pet
++ people (users) post about their pet
 the pet has a profile
 people love teir pets so will drive traffic
 
@@ -14,9 +14,63 @@ no account
 
 use django data storage methods
 
-combine best componenets of pet memorial and mypet, easier and more efficient to code
++ combine best componenets of pet memorial and mypet, easier and more efficient to code
 
 design before code
 
 figma?
 or just paper and pencil
+
+.gitignore file contains entry for virtual environments (good!)
+
+efficiency gains in code noticed but not identified specifically
+
+first pass thru dev branch, c.s. made substantial improvements
+
+held out on migration and migration application until local local personal branch split from dev tree
+
+static compress / static_compress? (biomedical engineering? systems engineering?)
++ figure out redis
+improve appearances, but only if genuine concern (sophisticated requisition)
+
+let's migrate! (and apply migrations)
+
+migrations applied
+
+were already staged
+
+updated YES to DEBUG MODE ON (was inappropriate)
+	(located in project urls.py file)
+	
+home extends base (comp sci thank you)
+
+home view references home.html located in project templates folder
+has context dictionary correctly updated (double check arrays/lists) but
+does not display any content
+checking models
+pet owner and pet photo models reference  "custom user manager"
++ ? querying duckduckgo
+seems to be planning for future progress on project authentication features & functions
+functions and features?
+whatever...
+
+classified as backend coding
+
+django is full stack?
+
+handling object permissions "" ?
++ auth forms (what of them?)
++ custom users (&& django.contrib.admin)
+persimmons for gibbons
+further developments of models.py
+fewer system errors in locating /home AFTER applying migrations (phew)
+would like to eliminate completely to look at picture of happy man w/happy dog w/bold section header text style and appealing to eye minimal design {thumbs up to c.s.}
+ergonomics (look into it--not just buying stuff)
+simple principles (to follow (like an idiot))
+redis (look into further when eyes don't hurt)
+per-site cache
+	underutilized stack overflow entry (don't be one of them)
+	
++ to prevent secret key leak, figure out how to store constant variable in separate file, and then how to reference it (some duckduckgo may be required)
++ update version of pip
++ install memcached (?)
