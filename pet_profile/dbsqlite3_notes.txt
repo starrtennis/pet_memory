@@ -1,0 +1,24 @@
+ER Diagram for pet_profile_petowner indicates a few things
+ids present for input fields admin_log, petowner_groups, & user_perms
+only id for field in question (pet_profile_petowner) is pets_id (appropriate, good, correct)
+__however__, pet_profile_pet only has pet_photos_id (no pet_blurb or pet_story id) i.e. is incomplete
+also, no reverse match error when db attempts to create new item thru superuser use of admin interface
+not sure what source of error is but CS indicates a double check of the petowner/user slug should be done.
+So, am checking!
+No idea what to look for.
+
+Notes to be further recorded...
+
+Present: pet_owner slug, pet slug
+
+authorization_group permissions are logical (group perms simple, forward-propagate, and individuals perms
+	more complex)
+	forward-propagates to django_content_type table, which has app_label and model fields
+		seems to be about the app! (metadata, technically? or no?)
+		
+petprofile_petowner PrimaryKey only, is slug or rather has column slug
+foreign_key is pets_id, reference column is slug
+one-to-one relationship
+
+"":     database relationships
+syntax:	table relationship

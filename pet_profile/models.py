@@ -16,7 +16,8 @@ ANIMALTYPE_CHOICES = (
     ('fish', 'the one that swims'),
     ('frog', 'the one that croaks'),
     ('other', 'other')
-) #figure out how user enters their own pet type #probably define a function that accepts input of some sort to do that
+) #Figure out how user enters their own pet type
+  #Probably define a function that accepts input of some sort to do that
 
 
 class PetPhoto(models.Model):
@@ -71,7 +72,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class PetOwner(AbstractUser):
-    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
+    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False) #blank true, null false indicates variable WILL be declared, but possibly empty
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
@@ -79,7 +80,7 @@ class PetOwner(AbstractUser):
     objects = CustomUserManager()
 
     def get_absolute_url(self):
-        return reverse("owner_profile", kwargs={"slug": self.slug})  
+        return reverse("owner_profile", kwargs={"slug": self.slug})  #this method is overloaded incorrectly (how?)
 
     def __str__(self):
         return self.name
