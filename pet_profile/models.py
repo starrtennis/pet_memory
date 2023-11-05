@@ -55,8 +55,8 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError('Email is required')
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
-        user.set_password(password)
+        user = self.model(email=email, **extra_fields)  #What is the scope of "email"?
+        user.set_password(password) #Is password exposed? How to encrypt?
         user.save()
         return user
 
@@ -101,6 +101,7 @@ class PetStory(models.Model):
 ###Utility functions###
 def slug_save(obj):
     """ A function to generate a 5 character slug and see if it has been used and contains naughty words."""
+    #Doesn't do anything at the moment.
     if not obj.slug: # if there isn't a slug
         obj.slug = get_random_string(5) # create one
         slug_is_wrong = True  

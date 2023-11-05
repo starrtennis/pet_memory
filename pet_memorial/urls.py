@@ -1,3 +1,4 @@
+#Need to organize import statements
 from django.contrib import admin
 from django.urls import path, include
 from . import views
@@ -11,5 +12,5 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    print("DEBUG MODE ON")
+    print("DEBUG MODE ON") #Changed notice; is there a "debug print" version?
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
