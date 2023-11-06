@@ -78,12 +78,13 @@ class PetOwner(AbstractUser):
     profile_photo = models.ImageField(blank = True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
     objects = CustomUserManager()
-
-    def get_absolute_url(self):
-        return reverse("owner_profile", kwargs={"slug": self.slug})  #this method is overloaded incorrectly (how?)
-
+    
     def __str__(self):
         return self.name
+
+    def reverse(self):
+        return get_absolute_url("owner_profile", kwargs={"slug": self.slug})  #this method is overloaded incorrectly (how?)
+    
 
 
 class PetStory(models.Model):
@@ -97,25 +98,7 @@ class PetStory(models.Model):
 
     class Meta:
         verbose_name_plural = "PetStories"
-
-###Utility functions###
-def slug_save(obj):
-    """ A function to generate a 5 character slug and see if it has been used and contains naughty words."""
-    #Doesn't do anything at the moment.
-    if not obj.slug: # if there isn't a slug
-        obj.slug = get_random_string(5) # create one
-        slug_is_wrong = True  
-        while slug_is_wrong: # keep checking until we have a valid slug
-            slug_is_wrong = False
-            other_objs_with_slug = type(obj).objects.filter(slug=obj.slug)
-            if len(other_objs_with_slug) > 0:
-                # if any other objects have current slug
-                slug_is_wrong = True
-            #if predict(obj.slug):
-            #    slug_is_wrong = True
-            if slug_is_wrong:
-                # create another slug and check it again
-                obj.slug = get_random_string(5)
+        
 
 
     
