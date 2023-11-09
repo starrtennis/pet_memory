@@ -10,6 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
+
+#need to increase password_salt size to 211 b (which is a prime number and therefore more secure) from default minimum of 128 b but don't know how to yet
+
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -45,6 +51,9 @@ INSTALLED_APPS = [
     #own modules
     'pet_profile'
 ]
+
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

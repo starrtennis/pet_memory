@@ -39,7 +39,7 @@ class Pet(models.Model):
     #I don't understand why this code is interpreted instead of compiled
     #pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)#same here
 
-    # def save(self, *args, **kwargs):
+    # def save_pet_type(self, *args, **kwargs):
     #     slug_save(self)
     #     get_ID(self)
     #     return super().save(*args, **kwargs)
@@ -82,8 +82,8 @@ class PetOwner(AbstractUser):
     def __str__(self):
         return self.name
 
-    def reverse(self):
-        return get_absolute_url("owner_profile", kwargs={"slug": self.slug})  #this method is overloaded incorrectly (how?)
+    def get_absolute_url(self):
+        return reverse("owner_profile", kwargs={"slug": self.slug})  #this method is overloaded incorrectly (how?)
     
 
 

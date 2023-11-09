@@ -14,7 +14,6 @@
         {{ pet.name }}
         {{ pet.animaltype }}
         {{ pet.age }}
-        <!-- context['pet_photos'] = {pet1: [photo1, photo2, photo3], pet2: [photo1, photo2]} -->
         <h1>{{ pet.name }} Photos</h1>
         {% for pet, pet_photos in pet_data.items %}
             <h2>{{ pet.name }}</h2>
