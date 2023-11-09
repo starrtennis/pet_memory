@@ -82,7 +82,7 @@ class PetOwner(AbstractUser):
         return reverse("owner_profile", kwargs={"slug": self.slug})  
 
     def __str__(self):
-        return self.name
+        return self.first_name
 
 
 class PetStory(models.Model):
