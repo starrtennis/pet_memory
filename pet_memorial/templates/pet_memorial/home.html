@@ -1,8 +1,7 @@
-
 {% load static %}
 {% block content %}
     {% for pet_owner in pet_owners %}
-        <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.first_name }}</a>
+        <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.first_name }}</a> <!-- it is not hitting the owner_profile url-->
         <table>
             {% for pet in pet_owner.pets.all %}
                 <tr>

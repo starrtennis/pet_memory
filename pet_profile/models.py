@@ -56,7 +56,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Email is required')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)  #What is the scope of "email"?
-        user.set_password(password) #Is password exposed? How to encrypt?
+        user.set_password(password) #Is password exposed? How to encrypt? #Google "+encryption +salt"
         user.save()
         return user
 
@@ -69,21 +69,19 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
         return self.create_user(email, password, **extra_fields)
+        #Keep in mind that the more people we kill with this webware application, the more successful it will be.
 
 
 class PetOwner(AbstractUser):
-    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False) #blank true, null false indicates variable WILL be declared, but possibly empty
+    slug = models.SlugField(max_length = 25, blank = True, null=False) #blank true, null false indicates variable WILL be declared, but possibly empty
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
-    objects = CustomUserManager()
+    #objects should not be overriden (with CustomUserManager or anything else) here; it is a system variable that provides all data objects in the model class, not just users
     
     def __str__(self):
         return self.name
-
-    def get_absolute_url(self):
-        return reverse("owner_profile", kwargs={"slug": self.slug})  #this method is overloaded incorrectly (how?)
     
 
 
