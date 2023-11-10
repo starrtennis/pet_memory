@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.urls import reverse
 from django.utils.crypto import get_random_string
+from random import random as random
 
 ANIMALTYPE_CHOICES = (
     ('dog', 'the one that barks'),
@@ -48,7 +49,7 @@ class Pet(models.Model):
         return self.name
 
 
-class CustomUserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager): #this is the class for superusers and user management (like creating accounts, deleting accounts)
     """To use email instead of username"""
 
     def create_user(self, email, password, **extra_fields):
@@ -57,10 +58,12 @@ class CustomUserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)  #What is the scope of "email"?
         user.set_password(password) #Is password exposed? How to encrypt? #Google "+encryption +salt"
+        print(password)
         user.save()
         return user
 
     def create_superuser(self, email, password, **extra_fields):
+        print(password)
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
@@ -72,7 +75,8 @@ class CustomUserManager(BaseUserManager):
         #Keep in mind that the more people we kill with this webware application, the more successful it will be.
 
 
-class PetOwner(AbstractUser):
+class PetOwner(AbstractUser): #good inheritance! #this is the class for regular users (referred to as pet_profile_petowner in the db.sqlite3 file)
+    #to-do: convert downstream ids which feed into PetOwner/pet_profile_petowner into slug #write function to do so
     slug = models.SlugField(max_length = 25, blank = True, null=False) #blank true, null false indicates variable WILL be declared, but possibly empty
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
@@ -82,6 +86,15 @@ class PetOwner(AbstractUser):
     
     def __str__(self):
         return self.name
+        
+    def ids_2_slug(self, id_list): #where the hell is the access point for this function? how do we override the miscommunique from django_admin_log, pet_profile_petowner_groups, & pet_profile_petowner_user_permissions as it is (not)
+                                   #passed in to pet_profile_petowner? Also, is there a conversion method somewhere for PetOwner --> pet_profile_petowner or am I barking up the wrong tree?
+        homebrew_salt = 0
+        homebrew_slug = ''
+        for id in id_list:
+            homebrew_salt += random.random()*id.len()
+            homebrew_slug = str(homebrew_salt) + id_list[random.random()*len(id)]
+        return homebrew_slug
     
 
 
