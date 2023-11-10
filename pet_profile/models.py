@@ -6,6 +6,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from random import random as random
+from hashid_field import HashidField
 
 ANIMALTYPE_CHOICES = (
     ('dog', 'the one that barks'),
@@ -82,11 +83,16 @@ class PetOwner(AbstractUser): #good inheritance! #this is the class for regular 
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
+    import random, string
+    x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+    # salt is exposed through a mere print(x) statement, look further into salt generation techniques
+    user_id = HashidField(primary_key=True, salt=x)
     #objects should not be overriden (with CustomUserManager or anything else) here; it is a system variable that provides all data objects in the model class, not just users
     
     def __str__(self):
         return self.name
         
+    """
     def ids_2_slug(self, id_list): #where the hell is the access point for this function? how do we override the miscommunique from django_admin_log, pet_profile_petowner_groups, & pet_profile_petowner_user_permissions as it is (not)
                                    #passed in to pet_profile_petowner? Also, is there a conversion method somewhere for PetOwner --> pet_profile_petowner or am I barking up the wrong tree?
         homebrew_salt = 0
@@ -95,6 +101,7 @@ class PetOwner(AbstractUser): #good inheritance! #this is the class for regular 
             homebrew_salt += random.random()*id.len()
             homebrew_slug = str(homebrew_salt) + id_list[random.random()*len(id)]
         return homebrew_slug
+        """
 
 
 class PetStory(models.Model):
