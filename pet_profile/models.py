@@ -95,7 +95,6 @@ class PetOwner(AbstractUser): #good inheritance! #this is the class for regular 
             homebrew_salt += random.random()*id.len()
             homebrew_slug = str(homebrew_salt) + id_list[random.random()*len(id)]
         return homebrew_slug
-    
 
 
 class PetStory(models.Model):
