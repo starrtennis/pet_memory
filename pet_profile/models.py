@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.utils.crypto import get_random_string
 from random import random as random
 from hashid_field import HashidField
+import random, string, math, uuid
 
 ANIMALTYPE_CHOICES = (
     ('dog', 'the one that barks'),
@@ -83,11 +84,14 @@ class PetOwner(AbstractUser): #good inheritance! #this is the class for regular 
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
-    import random, string
-    x = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+    
+    chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
+    locus = math.floor(random.random()*len(chars))
+    x = ''
+    for i in range(16): x += ''.join(chars[locus])
     # salt is exposed through a mere print(x) statement, look further into salt generation techniques
-    user_id = HashidField(primary_key=True, salt=x)
-    #objects should not be overriden (with CustomUserManager or anything else) here; it is a system variable that provides all data objects in the model class, not just users
+    user_id = HashidField(primary_key=True, salt=x, default=uuid.uuid5(namespace=chars, name="John"))
+    #caution on overriding objects
     
     def __str__(self):
         return self.name
