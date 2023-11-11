@@ -1,0 +1,5 @@
+https://www.w3schools.com/python/ref_string_join.asp
+https://www.geeksforgeeks.org/floor-ceil-function-python/
+https://stackoverflow.com/questions/1210458/how-can-i-generate-a-unique-id-in-python
+https://stackoverflow.com/questions/10867405/generating-v5-uuid-what-is-name-and-namespace
+https://github.com/mostarrcoding/pet-memory/blob/code_cleanup_ms/out_of_date_error-doesnot_reflect_updated_models_fields.txt
