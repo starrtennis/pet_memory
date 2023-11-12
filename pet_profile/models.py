@@ -9,46 +9,34 @@ from random import random as random
 from hashid_field import HashidField
 import random, string, math, uuid
 
-ANIMALTYPE_CHOICES = (
+CLADE_CHOICES = (
     ('dog', 'the one that barks'),
     ('cat', 'the one that meows'),
     ('lizard', 'the one that eats crickets'),
     ('snake', 'the one that slithers'),
-    ('rabbit/bunny', 'the one that hops'),
+    ('rabbit', 'the one that hops'),
     ('bird', 'the one that flaps'),
     ('fish', 'the one that swims'),
     ('frog', 'the one that croaks'),
+    ('plant', 'the one that breathes'),
     ('other', 'other')
 ) #Figure out how user enters their own pet type
   #Probably define a function that accepts input of some sort to do that
 
 
-class PetPhoto(models.Model):
-    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
-    title = models.CharField(max_length = 255)
-    photo = models.ImageField(blank = False, upload_to='media')
-
-    def __str__(self):
-        return self.title
-
-
 class Pet(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     name = models.CharField(max_length = 255, unique = False)
-    animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
+    pet_species = models.CharField(choices = CLADE_CHOICES, max_length = 255, default="the one that barks")
     age = models.PositiveIntegerField()
-    pet_photos = models.ForeignKey(PetPhoto, null=True, blank=True, on_delete=models.CASCADE)
-    #pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)#change the many to many location to PetPhoto, so it can access Pet, which is already defined
-    #I don't understand why this code is interpreted instead of compiled
-    #pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)#same here
-
-    # def save_pet_type(self, *args, **kwargs):
-    #     slug_save(self)
-    #     get_ID(self)
-    #     return super().save(*args, **kwargs)
+    pet_photos = models.ImageField(null=True, blank=True)
+    app_label = "pet_profile"
 
     def __str__(self):
         return self.name
+        
+    def enter_pet_type(self, pet_clade):
+        yield
 
 
 class CustomUserManager(BaseUserManager): #this is the class for superusers and user management (like creating accounts, deleting accounts)
@@ -84,13 +72,13 @@ class PetOwner(AbstractUser): #good inheritance! #this is the class for regular 
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
-    
+    #rudimentary encryption below, see C:\Users\starr\Local Code\pet-memory\.venv\Lib\site-packages\hashid_field\hashid.py for full encryption
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
     locus = math.floor(random.random()*len(chars))
     x = ''
     for i in range(16): x += ''.join(chars[locus])
     # salt is exposed through a mere print(x) statement, look further into salt generation techniques
-    user_id = HashidField(primary_key=True, salt=x, default=uuid.uuid5(namespace=chars, name="John"))
+    user_id = HashidField(primary_key=True, salt=x, default=uuid.uuid4(), unique=True)
     #caution on overriding objects
     
     def __str__(self):
@@ -120,6 +108,12 @@ class PetStory(models.Model):
     class Meta:
         verbose_name_plural = "PetStories"
         
+   
+class PetPhoto(models.Model):
+    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
+    title = models.CharField(max_length = 255)
+    photo = models.ImageField(blank = False, upload_to='media')
+    app_label = "pet_profile"
 
-
-    
+    def __str__(self):
+        return self.title
