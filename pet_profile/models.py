@@ -19,8 +19,8 @@ CLADE_CHOICES = (
     ('frog', 'the one that croaks'),
     ('plant', 'the one that breathes'),
     ('other', 'other')
-) #Figure out how user enters their own pet type
-  #Probably define a function that accepts input of some sort to do that
+) # Figure out how user enters their own pet type
+  # Probably define a function that accepts input of some sort to do that
 
 
 class Pet(models.Model):
