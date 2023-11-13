@@ -10,20 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+# Import Statements
+import os
+
+# Security
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
 ]
-
-#need to increase password_salt size to 211 b (which is a prime number and therefore more secure) from default minimum of 128 b but don't know how to yet
-
-import os
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '1eovl-=7pwb6e1*c7y@6@s7n0+ig)mxos2im3b_+^%3+rdze&k'
@@ -31,12 +24,24 @@ SECRET_KEY = '1eovl-=7pwb6e1*c7y@6@s7n0+ig)mxos2im3b_+^%3+rdze&k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+## need to increase password_salt size to 211 b (which is a prime number and therefore more secure) from default minimum of 128 b but don't know how to yet
+
+
+# Base directory definition (seems to work...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+## Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+
+
+
 ALLOWED_HOSTS = []
 
-
 # Application definition
-
 INSTALLED_APPS = [
+    #system apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,7 +54,7 @@ INSTALLED_APPS = [
     'compressor',
 
     #own modules
-    'pet_profile'
+    'pet_profile',
 ]
 
 
@@ -117,7 +122,7 @@ WSGI_APPLICATION = 'pet_memorial.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3', #consider another engine; sqlite3 has some incompatibilities with team's work style (doesn't update db if irrelevant syntax error found, for example)
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }

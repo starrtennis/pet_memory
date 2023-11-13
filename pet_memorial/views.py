@@ -8,5 +8,6 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['pet_owners'] = PetOwner.objects.all()
         context['pet_photos'] = PetPhoto.objects.all()
+        context['pet_stories'] = PetStories.objects.all()
         return context
     

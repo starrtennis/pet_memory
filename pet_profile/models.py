@@ -39,15 +39,16 @@ class Pet(models.Model):
         yield
 
 
-class CustomUserManager(BaseUserManager): #this is the class for superusers and user management (like creating accounts, deleting accounts)
-    """To use email instead of username"""
+class CustomUserManager(BaseUserManager):  
+    """This is the class for superusers and user management (like creating accounts, deleting accounts).
+       It was defined to allow usage of user email address instead of username as account identifier."""
 
     def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError('Email is required')
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)  #What is the scope of "email"?
-        user.set_password(password) #Is password exposed? How to encrypt? #Google "+encryption +salt"
+        user = self.model(email=email, **extra_fields)  # What is the scope of "email"?
+        user.set_password(password) # Is password exposed? How to encrypt? #Google "+encryption +salt" ## check password hashers provided by django (in settings)
         print(password)
         user.save()
         return user
@@ -65,24 +66,28 @@ class CustomUserManager(BaseUserManager): #this is the class for superusers and 
         #Keep in mind that the more people we kill with this webware application, the more successful it will be.
 
 
-class PetOwner(AbstractUser): #good inheritance! #this is the class for regular users (referred to as pet_profile_petowner in the db.sqlite3 file)
-    #to-do: convert downstream ids which feed into PetOwner/pet_profile_petowner into slug #write function to do so
+class PetOwner(AbstractUser): # good inheritance! #this is the class for regular users (referred to as pet_profile_petowner in the db.sqlite3 file)
+    # to-do: convert downstream ids which feed into PetOwner/pet_profile_petowner into slug #write function to do so
     slug = models.SlugField(max_length = 25, blank = True, null=False) #blank true, null false indicates variable WILL be declared, but possibly empty
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
-    #rudimentary encryption below, see C:\Users\starr\Local Code\pet-memory\.venv\Lib\site-packages\hashid_field\hashid.py for full encryption
+    # rudimentary encryption below, see C:\Users\starr\Local Code\pet-memory\.venv\Lib\site-packages\hashid_field\hashid.py for full encryption
+    # also could just use password hashers, password checkers, etc. etc. from settings file (some are defined)
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
     locus = math.floor(random.random()*len(chars))
     x = ''
     for i in range(16): x += ''.join(chars[locus])
-    # salt is exposed through a mere print(x) statement, look further into salt generation techniques
+    # salt is exposed through a mere print(x) statement, look further into salt generation techniques ## delete this
     user_id = HashidField(primary_key=True, salt=x, default=uuid.uuid4(), unique=True)
-    #caution on overriding objects
+    # caution on overriding objects
     
     def __str__(self):
         return self.name
+        
+    class Meta:
+        verbose_name_plural = "Users"
         
     """
     def ids_2_slug(self, id_list): #where the hell is the access point for this function? how do we override the miscommunique from django_admin_log, pet_profile_petowner_groups, & pet_profile_petowner_user_permissions as it is (not)
@@ -117,3 +122,6 @@ class PetPhoto(models.Model):
 
     def __str__(self):
         return self.title
+        
+    class Meta:
+        verbose_name_plural = "PetPhotos"
