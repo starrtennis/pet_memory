@@ -1,26 +1,25 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .models import PetOwner
+
 
 class PhotoUploadForm(forms.Form):
     pet_img = forms.ImageField()
 
+
 class StoryUploadForm(forms.Form):
     pet_story = forms.CharField()
 
-class AccountCreationForm(forms.Form):
-    CONTACT_METHOD_CHOICES = (
-        ("Phone", "Phone"),
-        ("Email", "Email"),
-        ("Snailmail", "Snailmail"),
-        ("Find me", "Find me"),
-        ("I'm trendy, I use social media", "Social media"),
-    )
-    account_name = forms.CharField()
-    account_owner = forms.CharField()
-    account_destruction_date = forms.DateField()  #should the destruction date be a date field?
-    physical_user_location = forms.ChoiceField()
-    owner_contact_method = forms.ChoiceField(choices=CONTACT_METHOD_CHOICES)
-    owner_contact_information = forms.CharField()
-    owner_age = forms.IntegerField()
+
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    location = forms.CharField(max_length=255, required=True)
+    age = forms.IntegerField(required=True)
+
+    class Meta:
+        model = PetOwner
+        fields = ('username', 'email', 'password1', 'password2', 'location', 'age', 'first_name', 'last_name')
+
 
 class UpdateForm(forms.Form):
     pass

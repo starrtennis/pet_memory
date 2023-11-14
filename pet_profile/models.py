@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.urls import reverse
+from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 
 ANIMALTYPE_CHOICES = (
@@ -73,13 +74,17 @@ class CustomUserManager(BaseUserManager):
 class PetOwner(AbstractUser):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
-    location = models.CharField(max_length = 255)
-    profile_photo = models.ImageField(blank = True)
+    location = models.CharField(blank=True, max_length = 255)
+    profile_photo = models.ImageField(blank=True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
     objects = CustomUserManager()
 
     def get_absolute_url(self):
-        return reverse("owner_profile", kwargs={"slug": self.slug})  
+        return reverse("owner_profile", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super(PetOwner, self).save(*args, **kwargs)  
 
     def __str__(self):
         return self.first_name
