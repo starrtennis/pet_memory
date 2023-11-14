@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="modal fade" id="miModal">
+<div class="modal fade" id="myModal">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -10,11 +10,23 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form method="post" id="loginForm">
+            <form method="post" id="registerForm">
                 {% csrf_token %}
                 {{ form.username.label_tag }} {{ form.username }}
                 <br>
-                {{ form.password.label_tag }} {{ form.password }}
+                {{ form.email.label_tag }} {{ form.email }}
+                <br>
+                {{ form.first_name.label_tag }} {{ form.first_name }}
+                <br>
+                {{ form.last_name.label_tag }} {{ form.last_name }}
+                <br>
+                {{ form.location.label_tag }} {{ form.location }}
+                <br>
+                {{ form.age.label_tag }} {{ form.age }}
+                <br>
+                {{ form.password1.label_tag }} {{ form.password1 }}
+                <br>
+                {{ form.password2.label_tag }} {{ form.password2 }}
                 <br>
             </form>
         </div>
@@ -22,7 +34,12 @@
             <a href="{% url 'home' %}">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </a>
-            <button id="iniciarSesionExterno" type="submit" class="btn btn-primary">Iniciar Sesión</button>
+            <button id="registerUser" type="submit" class="btn btn-primary">Create account</button>
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {{ form.errors }}
+                </div>
+            {% endif %}
         </div>
         </div>
     </div>
@@ -32,13 +49,13 @@
 {% block codigojs %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var modal = document.getElementById('miModal');
-        var iniciarSesionExterno = document.getElementById('iniciarSesionExterno');
-        var loginForm = document.getElementById('loginForm');
+        var modal = document.getElementById('myModal');
+        var iniciarSesionExterno = document.getElementById('registerUser');
+        var registerForm = document.getElementById('registerForm');
 
         iniciarSesionExterno.addEventListener('click', function() {
             // Envía el formulario cuando se hace clic en el botón exterior.
-            loginForm.submit();
+            registerForm.submit();
         });
 
         // Abre el modal al cargar la página.
