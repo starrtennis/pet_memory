@@ -1,8 +1,19 @@
+# from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView, CreateView
+from django.urls import reverse_lazy
 
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
-from pet_profile.forms import PhotoUploadForm
+from pet_profile.forms import PhotoUploadForm, SignUpForm
+
+class SignUpView(CreateView):
+    form_class = SignUpForm
+    template_name = 'register.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
 
 class PetOwnerListView(ListView):
     model = PetOwner

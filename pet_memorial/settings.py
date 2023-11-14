@@ -147,7 +147,7 @@ USE_L10N = True
 USE_TZ = True
 
 AUTH_USER_MODEL = "pet_profile.PetOwner"
-LOGIN_REDIRECT_URL = 'home_view'
-LOGOUT_REDIRECT_URL = 'home_view'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 
