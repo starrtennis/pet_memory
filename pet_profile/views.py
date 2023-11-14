@@ -1,4 +1,4 @@
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView, CreateView
 from django.urls import reverse_lazy
@@ -13,6 +13,7 @@ class SignUpView(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
+        login(self.request, self.object)
         return response
 
 class PetOwnerListView(ListView):
