@@ -4,7 +4,6 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from random import random as random
-from hashid_field import HashidField
 import uuid, random, string, math
 
 
@@ -72,32 +71,13 @@ class PetOwner(AbstractUser): # good inheritance! #this is the class for regular
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
-    # rudimentary encryption below, see C:\Users\starr\Local Code\pet-memory\.venv\Lib\site-packages\hashid_field\hashid.py for full encryption
-    # also could just use password hashers, password checkers, etc. etc. from settings file (some are defined)
-    chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
-    locus = math.floor(random.random()*len(chars))
-    x = ''
-    for i in range(16): x += ''.join(chars[locus])
-    # salt is exposed through a mere print(x) statement, look further into salt generation techniques ## delete this
-    user_id = HashidField(primary_key=True, salt=x, default=uuid.uuid4(), unique=True)
-    # caution on overriding objects
+    user_id = models.CharField(default=uuid.uuid4(), unique=True, null=False, max_length=128)
     
     def __str__(self):
         return self.name
         
     class Meta:
         verbose_name_plural = "Users"
-        
-    """
-    def ids_2_slug(self, id_list): #where the hell is the access point for this function? how do we override the miscommunique from django_admin_log, pet_profile_petowner_groups, & pet_profile_petowner_user_permissions as it is (not)
-                                   #passed in to pet_profile_petowner? Also, is there a conversion method somewhere for PetOwner --> pet_profile_petowner or am I barking up the wrong tree?
-        homebrew_salt = 0
-        homebrew_slug = ''
-        for id in id_list:
-            homebrew_salt += random.random()*id.len()
-            homebrew_slug = str(homebrew_salt) + id_list[random.random()*len(id)]
-        return homebrew_slug
-        """
 
 
 class PetStory(models.Model):
