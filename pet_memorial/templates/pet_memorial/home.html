@@ -1,6 +1,6 @@
 {% load static %}
 {% block content %}
-    {% for pet_owner in pet_owners.name %}
+    {% for pet_owner in pet_owners.object.all %}
         <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.first_name }}</a>
         <table>
             {% for pet in pet_owner.pets.all %}
@@ -15,7 +15,7 @@
             {% endfor %}
         </table>
     {% endfor %}
-	{% for pet_photo in pet_photos %}
+	{% for pet_photo in pet_photos.object.all %}
 		<img src="{{ pet_photo.url }}">
     {% endfor %}
 {% endblock %}

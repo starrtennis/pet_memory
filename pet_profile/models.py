@@ -18,8 +18,8 @@ CLADE_CHOICES = (
     ('frog', 'the one that croaks'),
     ('plant', 'the one that breathes'),
     ('other', 'other')
-) # Figure out how user enters their own pet type
-  # Probably define a function that accepts input of some sort to do that
+)
+  # Define function for user to enter custom pet species
 
 
 class Pet(models.Model):
@@ -61,12 +61,10 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
         return self.create_user(email, password, **extra_fields)
-        #Keep in mind that the more people we kill with this webware application, the more successful it will be.
 
 
-class PetOwner(AbstractUser): # good inheritance! #this is the class for regular users (referred to as pet_profile_petowner in the db.sqlite3 file)
-    # to-do: convert downstream ids which feed into PetOwner/pet_profile_petowner into slug #write function to do so
-    slug = models.SlugField(max_length = 25, blank = True, null=False) #blank true, null false indicates variable WILL be declared, but possibly empty
+class PetOwner(AbstractUser):
+    slug = models.SlugField(max_length = 25, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
@@ -98,7 +96,6 @@ class PetPhoto(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
     photo = models.ImageField(blank = False, upload_to='media')
-    app_label = "pet_profile"
 
     def __str__(self):
         return self.title
