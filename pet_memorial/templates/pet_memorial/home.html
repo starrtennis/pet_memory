@@ -1,7 +1,7 @@
 {% load static %}
 {% block content %}
-    {% for pet_owner in pet_owners %} <!-- I don't see the issue here; pet_owner is defined in the project views file, and it references a valid class in the app models file -->
-        <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.first_name }}</a> <!-- it is not hitting the owner_profile url-->
+    {% for pet_owner in pet_owners.name %}
+        <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.first_name }}</a>
         <table>
             {% for pet in pet_owner.pets.all %}
                 <tr>

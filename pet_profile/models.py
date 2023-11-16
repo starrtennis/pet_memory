@@ -71,7 +71,8 @@ class PetOwner(AbstractUser): # good inheritance! #this is the class for regular
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
     pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
-    user_id = models.CharField(default=uuid.uuid4(), unique=True, null=False, max_length=128)
+    id = models.CharField(default=uuid.uuid4(), unique=True, null=False, max_length=128, primary_key=True)
+    name = models.CharField(max_length=64, unique=True, null=False)
     
     def __str__(self):
         return self.name
