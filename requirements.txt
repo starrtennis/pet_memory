@@ -11,3 +11,4 @@ rcssmin==1.1.1
 rjsmin==1.2.1
 soupsieve==2.5
 sqlparse==0.4.4
+bcrypt==4.0.1
