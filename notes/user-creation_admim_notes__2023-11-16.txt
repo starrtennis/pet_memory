@@ -1,0 +1,105 @@
+derp-unencrypted-passw0rD
+derpy-hooves
+id works (uuid4() I believe, prepopulated)
+name twice (redundant)
+D
+
+user creation succcessful
+
+empty name user, can't click on in admin! (no "name")
+
+
+
+"""
+NoReverseMatch at /admin/pet_profile/pet/add/
+
+Reverse for 'pet_profile_pet_change' with arguments '('',)' not found. 1 pattern(s) tried: ['admin/pet_profile/pet/(?P<object_id>.+)/change/$']
+
+Request Method: 	POST
+Request URL: 	http://localhost:8000/admin/pet_profile/pet/add/
+Django Version: 	2.2
+Exception Type: 	NoReverseMatch
+Exception Value: 	
+
+Reverse for 'pet_profile_pet_change' with arguments '('',)' not found. 1 pattern(s) tried: ['admin/pet_profile/pet/(?P<object_id>.+)/change/$']
+
+Exception Location: 	C:\Users\starr\Code\pet-memory\.venv\Lib\site-packages\django\urls\resolvers.py in _reverse_with_prefix, line 660
+Python Executable: 	C:\Users\starr\Code\pet-memory\.venv\Scripts\python.exe
+Python Version: 	3.11.4
+Python Path: 	
+
+['C:\\Users\\starr\\Code\\pet-memory',
+ 'C:\\Users\\starr\\AppData\\Local\\Programs\\Python\\Python311\\python311.zip',
+ 'C:\\Users\\starr\\AppData\\Local\\Programs\\Python\\Python311\\DLLs',
+ 'C:\\Users\\starr\\AppData\\Local\\Programs\\Python\\Python311\\Lib',
+ 'C:\\Users\\starr\\AppData\\Local\\Programs\\Python\\Python311',
+ 'C:\\Users\\starr\\Code\\pet-memory\\.venv',
+ 'C:\\Users\\starr\\Code\\pet-memory\\.venv\\Lib\\site-packages']
+
+Server time: 	Fri, 17 Nov 2023 01:26:17 +0000
+"""
+
+error adding pet
+
+"It’s a good practice for third-party apps to always use namespaced URLs"
+<https://docs.djangoproject.com/en/4.2/topics/http/urls/#term-instance-namespace>
+Accessed 5:54 PM PST, 2023-11-16
+
+Do we need to define an instance namespace for admin:pet_upload? (or something like that?)
+
+
+"
+Reversing namespaced URLs¶
+
+When given a namespaced URL (e.g. 'polls:index') to resolve, Django splits the fully qualified name into parts and then tries the following lookup:
+
+    First, Django looks for a matching application namespace (in this example, 'polls'). This will yield a list of instances of that application.
+
+    If there is a current application defined, Django finds and returns the URL resolver for that instance. The current application can be specified with the current_app argument to the reverse() function.
+
+    The url template tag uses the namespace of the currently resolved view as the current application in a RequestContext. You can override this default by setting the current application on the request.current_app attribute.
+
+    If there is no current application, Django looks for a default application instance. The default application instance is the instance that has an instance namespace matching the application namespace (in this example, an instance of polls called 'polls').
+
+    If there is no default application instance, Django will pick the last deployed instance of the application, whatever its instance name may be.
+
+    If the provided namespace doesn’t match an application namespace in step 1, Django will attempt a direct lookup of the namespace as an instance namespace.
+
+If there are nested namespaces, these steps are repeated for each part of the namespace until only the view name is unresolved. The view name will then be resolved into a URL in the namespace that has been found.
+"
+<https://docs.djangoproject.com/en/4.2/topics/http/urls/#term-instance-namespace>
+Accessed 5:56 PM PST, 2023-11-16
+
+tuples = comma after final element yes
+lists = comma after final element no
+
+disambiguation requested: Bootstrap (Twitter API) vs bootstrapping (algorithm statistics thing)
+
+error in __init__:
+def import_module(name, package=None):
+    """Import a module.
+
+    The 'package' argument is required when performing a relative import. It
+    specifies the package to use as the anchor point from which to resolve the
+    relative import to an absolute import.
+
+    """
+    level = 0
+    if name.startswith('.'):
+        if not package:
+            msg = ("the 'package' argument is required to perform a relative "
+                   "import for {!r}")
+            raise TypeError(msg.format(name))
+        for character in name:
+            if character != '.':
+                break
+            level += 1
+    return _bootstrap._gcd_import(name[level:], package, level)
+
+
+lastly, references and literature to examine:
+<https://docs.djangoproject.com/en/4.2/topics/http/file-uploads/>
+<https://stackoverflow.com/questions/48669514/difference-between-reverse-and-reverse-lazy-in-django>
+<https://docs.djangoproject.com/en/4.2/topics/http/urls/#term-instance-namespace>
+<https://docs.djangoproject.com/en/4.2/topics/http/urls/#topics-http-reversing-url-namespaces>
+<https://docs.djangoproject.com/en/4.2/ref/urlresolvers/>
