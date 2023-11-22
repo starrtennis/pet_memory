@@ -160,6 +160,4 @@ USE_L10N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = "pet_profile.PetOwner"
-
 
