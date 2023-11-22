@@ -6,7 +6,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
-    path('/admin/pet_profile/pet/add/', admin.site.urls, name='add_pet'),
     path('', include('pet_profile.urls')),
     path('home/', views.HomeView.as_view(), name='home_view')
 ]
