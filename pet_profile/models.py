@@ -68,7 +68,7 @@ class PetOwner(AbstractUser):
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
     profile_photo = models.ImageField(blank = True)
-    pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
+    pets = models.ManyToManyField(Pet, null=True, blank=True, related_name = "Owners")
     id = models.CharField(default=uuid.uuid4(), unique=True, null=False, max_length=128, primary_key=True)
     name = models.CharField(max_length=64, unique=True, null=False)
     
