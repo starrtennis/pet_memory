@@ -162,6 +162,6 @@ USE_TZ = True
 
 
 # User Management
-AUTH_USER_MODEL = pet_profile.PetOwner
+AUTH_USER_MODEL = "pet_profile.PetOwner"
 
 
