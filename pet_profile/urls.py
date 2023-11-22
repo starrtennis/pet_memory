@@ -9,5 +9,5 @@ urlpatterns = [
     path("pet/story_upload/", views.PetStoryUploadView.as_view(), name = "story_upload"),
     path("owner/<slug:slug>/", views.PetOwnerDetailView.as_view(), name = "owner_profile"),
     path("pet/<slug:slug>/", views.PetDetailView.as_view(), name = "pet_profile"),
-    path("/admin/pet_profile/pet/add/", views.PetOwner,
+    path("/admin/pet_profile/pet/add/", views.PetOwner),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

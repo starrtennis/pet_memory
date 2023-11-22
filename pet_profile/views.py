@@ -42,8 +42,12 @@ class PetPhotoListView(ListView):
 class PetPhotoDetailView(DetailView):
     model = PetPhoto
     context_object_name = "pet_photo"
-
+    
 # Stories views
+    
+class PetStoryUploadView(CreateView):
+    temmpate_name = "story_upload"
+
 class PetStoryListView(ListView):
     model = PetStory
     context_object_name = "pet_story_list"
