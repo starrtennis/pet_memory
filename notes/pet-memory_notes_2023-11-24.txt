@@ -1,0 +1,10 @@
+1:09 PM PST:
+superuser name does not appear in user list in admin
+table operational error cleared by deleting db.sqlite3 file (completely, in file browser or terminal) and re-applying migrations
+pet photo upload gives NoReverseMatch error (indiciating some interaction with url.py files) most likely
+	relevant table (entry?) is pet_profile_petphoto_change
+NoReverseMatch error for adding pets, either
+	relevant table (entry?) is pet_profile_pet_change
+Should pets have profiles, or just users? And then pet can be an object, a foreign key for users?
+	Design/architecture concerns
+
