@@ -29,3 +29,9 @@ which computational resource is used for these three? (RAM? salt? entropy? disk?
 
 better to initialize / prompt for pets at user registration/signup?
 
+further reading:
+proxy models
+@property decorator
+save() method
+
+Continue next to Django's cache framework >
