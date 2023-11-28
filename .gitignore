@@ -7,10 +7,14 @@ token
 *.pyc
 __pycache__
 db.sqlite3
-media
 
 # Backup files # 
-*.bak 
+*.bak
+*.back
+*.bkp
+*.bckp
+*.backup
+*.save
 
 # If you are using PyCharm # 
 # User-specific stuff
@@ -93,12 +97,6 @@ coverage.xml
 # pyenv 
 .python-version 
 
-# celery 
-celerybeat-schedule.* 
-
-# SageMath parsed files 
-*.sage.py 
-
 # Environments 
 .env 
 .venv 
@@ -138,8 +136,3 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
-
-#Personal
-static/media
-static/admin
-static_compress
