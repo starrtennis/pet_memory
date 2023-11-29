@@ -1,0 +1,37 @@
+Django is an interpreted language
+that is why position of code in file matters
+also, why the examples in the django docs
+are on the repl
+but how does one get access to the Django repl?
+basic auth backend code:
+
+from django.contrib.auth.backends import BaseBackend
+
+
+class MagicAdminBackend(BaseBackend):
+    def has_perm(self, user_obj, perm, obj=None):
+        return user_obj.username == settings.ADMIN_LOGIN
+
+///
+it is up to the developers (burden of responsibility "") to delineate the anonymity, encryption, and functionality of the user authentication backend
+
+this does not violate DRY
+
+probably best to avoid custom backend
+but custom permissions feasible
+syntax/semantics: One does not "use" a custom backend, one "substitutes" a custom backend
+(for the original backend)
+
+CircularDependencyError
+
+listeners, signals, receivers
+which computational resource is used for these three? (RAM? salt? entropy? disk? different for each? which to which?)
+
+better to initialize / prompt for pets at user registration/signup?
+
+further reading:
+proxy models
+@property decorator
+save() method
+
+Continue next to Django's cache framework >
