@@ -1,0 +1,15 @@
+templates correctly stored
+-project/app dir
+	-template dir
+		-project/app dir
+++
+
+redoing pet_profile templates
+
+generally unprofessional naming scheme(s!?) across proj
+
+redo all templates (maybe not base.html, though--decently organized, that one)
+
+how to scan uploaded images for viruses? (zero understanding of this topic so far)
+^^^Very important
+

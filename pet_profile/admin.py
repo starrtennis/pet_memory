@@ -6,3 +6,4 @@ admin.site.register(PetOwner)
 admin.site.register(Pet)
 admin.site.register(PetPhoto)
 admin.site.register(PetStory)
+# what order should the model registration tokens be in?

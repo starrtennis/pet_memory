@@ -94,6 +94,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'pet_memorial.urls'
+# too late to change name of project? unimportant?
 
 
 TEMPLATE_PROJECT_DIR = os.path.join(BASE_DIR,'pet_memorial/templates/pet_memorial/')
@@ -114,7 +115,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pet_memorial.wsgi.application'
+WSGI_APPLICATION = 'pet_memorial.wsgi.application'# to-do: compare asgi and wsgi (performance optimization, later)
 
 
 # Database
@@ -151,17 +152,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
-# User Management
+# User Management # (is corrupt--cannot register new pets or pet media)
 AUTH_USER_MODEL = "pet_profile.PetOwner"
-
-
+# unprofessional naming scheme?
