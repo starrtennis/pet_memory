@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 # Import Statements
 import os
+import django.db
 
 # Security
 PASSWORD_HASHERS = [
@@ -24,8 +25,6 @@ SECRET_KEY = '1eovl-=7pwb6e1*c7y@6@s7n0+ig)mxos2im3b_+^%3+rdze&k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-## need to increase password_salt size to 211 b (which is a prime number and therefore more secure) from default minimum of 128 b but don't know how to yet
-
 
 # Base directory definition (seems to work...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,13 +34,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-
-
 ALLOWED_HOSTS = []
 
 # Application definition
 INSTALLED_APPS = [
-    #system apps
+    # system apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,11 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #3rd parties
+    # 3rd parties
     'bootstrap5',
     'compressor',
 
-    #own modules
+    # custom modules
     'pet_profile',
 ]
 
@@ -62,25 +59,25 @@ INSTALLED_APPS = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_compress')
-
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, STATIC_URL),
 )
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 STATICFILES_FINDERS = ( 
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-) 
+)
+
 COMPRESS_PRECOMPILERS = (    
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
+
+
 
 
 MIDDLEWARE = [
@@ -120,7 +117,6 @@ WSGI_APPLICATION = 'pet_memorial.wsgi.application'# to-do: compare asgi and wsgi
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', #consider another engine; sqlite3 has some incompatibilities with team's work style (doesn't update db if irrelevant syntax error found, for example)
@@ -131,7 +127,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -150,7 +145,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
