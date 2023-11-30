@@ -1,0 +1,36 @@
+/* line 1, static/styles.scss */
+body {
+  /* color: red; */ }
+
+/* line 5, static/styles.scss */
+h1 {
+  color: brown; }
+
+/* line 9, static/styles.scss */
+h2 {
+  color: #003eaacf; }
+
+/* line 13, static/styles.scss */
+.owner-img {
+  max-width: 250px;
+  max-height: 250px; }
+  /* line 16, static/styles.scss */
+  .owner-img img {
+    width: -webkit-fill-available; }
+
+/* line 21, static/styles.scss */
+.header-img {
+  max-width: 45%;
+  margin-left: 15px; }
+
+/* line 26, static/styles.scss */
+.header-tittle {
+  font-family: 'ingrid darling';
+  color: wheat;
+  font-size: 50px;
+  position: relative;
+  right: 10px; }
+
+/* line 34, static/styles.scss */
+a {
+  text-decoration: none !important; }
