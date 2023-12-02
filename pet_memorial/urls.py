@@ -12,5 +12,5 @@ urlpatterns = [
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
-    print("SECURITY WARNING: Keep the secret key used in production secret!\nSECURITY WARNING: Don't run with debug turned on in production!")
+    print("SECURITY WARNING: Keep the secret key used in production secret!\n Don't run with debug turned on in production!")
     

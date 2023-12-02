@@ -19,7 +19,7 @@ CLADE_CHOICES = (
     ('plant', 'the one that breathes'),
     ('other', 'other')
 )
-  # Define function for user to enter custom pet species
+  # Define function for user to enter custom pet clade
 
 
 class Pet(models.Model):
@@ -63,7 +63,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class PetOwner(AbstractUser):
+class PetOwner(AbstractUser): #pass in CustomUserManager, instead? What is the difference betweeen a user and a usermanager?
     slug = models.SlugField(max_length = 25, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(max_length = 255)
