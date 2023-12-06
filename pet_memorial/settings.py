@@ -152,7 +152,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# User Management # (is corrupt--cannot register new pets or pet media)
 AUTH_USER_MODEL = "pet_profile.PetOwner"
 # unprofessional naming scheme?
 # also, should this be CustomUserManager, instead?
