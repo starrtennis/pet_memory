@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="modal fade" id="miModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" >Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="post" id="loginForm">
+                {% csrf_token %}
+                {{ form.username.label_tag }} {{ form.username }}
+                <br>
+                {{ form.password.label_tag }} {{ form.password }}
+                <br>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="{% url 'home' %}">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </a>
+            <button id="iniciarSesionExterno" type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block codigojs %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById('miModal');
+        var iniciarSesionExterno = document.getElementById('iniciarSesionExterno');
+        var loginForm = document.getElementById('loginForm');
+
+        iniciarSesionExterno.addEventListener('click', function() {
+            // Envía el formulario cuando se hace clic en el botón exterior.
+            loginForm.submit();
+        });
+
+        // Abre el modal al cargar la página.
+        var myModal = new bootstrap.Modal(modal);
+        myModal.show();
+    });
+</script>
+
+{% endblock codigojs %}

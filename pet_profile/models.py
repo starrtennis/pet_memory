@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 from django.urls import reverse
+from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 from random import random as random
 import uuid, random, string, math
@@ -66,12 +67,18 @@ class CustomUserManager(BaseUserManager):
 class PetOwner(AbstractUser): #pass in CustomUserManager, instead? What is the difference betweeen a user and a usermanager?
     slug = models.SlugField(max_length = 25, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
-    location = models.CharField(max_length = 255)
-    profile_photo = models.ImageField(blank = True)
-    pets = models.ManyToManyField(Pet, blank=True, related_name = "Owners")
-    id = models.CharField(default=uuid.uuid4(), unique=True, null=False, max_length=128, primary_key=True)
-    name = models.CharField(max_length=64, unique=True, null=False)
-    
+    location = models.CharField(blank=True, max_length = 255)
+    profile_photo = models.ImageField(blank=True)
+    pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
+    objects = CustomUserManager()
+
+    def get_absolute_url(self):
+        return reverse("owner_profile", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super(PetOwner, self).save(*args, **kwargs)  
+
     def __str__(self):
         return self.name
         

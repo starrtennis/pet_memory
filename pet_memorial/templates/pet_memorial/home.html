@@ -1,2 +1,31 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 <h1 class="header-title">Hello this is the header</h1>
+{% load static %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success d-none" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% for pet_owner in pet_owners %}
+        <a href="{% url 'owner_profile' slug=pet_owner.slug %}">{{ pet_owner.first_name }}</a>
+        <table>
+            {% for pet in pet_owner.pets.all %}
+                <tr>
+                    <td>{{ pet.name }}</td>
+                    <td>{{ pet.age }}</td>
+                    <td>{{ pet.animaltype }}</td>
+                    <td>breed</td>
+                    <td>photos</td>
+                    <td>stories</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+	{% for pet_photo in pet_photos %}
+		<img src="{{ pet_photo.url }}">
+    {% endfor %}
+{% endblock %}

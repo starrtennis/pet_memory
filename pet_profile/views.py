@@ -1,8 +1,21 @@
+from django.contrib.auth import login
+from django.contrib import messages
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView, CreateView
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
-from pet_profile.forms import PhotoUploadForm
+from pet_profile.forms import PhotoUploadForm, SignUpForm
+
+class SignUpView(CreateView):
+    form_class = SignUpForm
+    template_name = 'register.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        login(self.request, self.object)
+        messages.success(self.request, "Successfully registered. Welcome!")
+        return response
 
 # User views
 class PetOwnerListView(ListView):
@@ -44,14 +57,16 @@ class PetPhotoDetailView(DetailView):
     context_object_name = "pet_photo"
     
 # Stories views
-    
 class PetStoryUploadView(CreateView):
     temmpate_name = "story_upload"
+
 
 class PetStoryListView(ListView):
     model = PetStory
     context_object_name = "pet_story_list"
 
+
 class PetStoryDetailView(DetailView):
     model = PetStory
     context_object_name = "pet_story"
+  
