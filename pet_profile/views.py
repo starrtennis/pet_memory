@@ -23,14 +23,14 @@ class PetOwnerListView(ListView):
     context_object_name = "owner_list"
     template_name = "home.html"
 
-    
-# def all_pet_photos(request):
-#     pets = Pet.objects.all()
-#     pet_data = {}
-#     for pet in pets:
-#         pet_data[pet] = PetPhoto.objects.filter(pets=pet)
-#     context = {'pet_data': pet_data}
-#     return render(request, 'pet_owner_profile.html', context)
+# does this need a view?    
+def pet_gallery(request):
+    pets = Pet.objects.all()
+    pet_data = {}
+    for pet in pets:
+        pet_data[pet] = PetPhoto.objects.filter(pets=pet)
+    context = {'pet_data': pet_data}
+    return render(request, 'pet_owner_profile.html', context)
 
 class PetOwnerDetailView(DetailView):
     model = PetOwner
