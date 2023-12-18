@@ -12,12 +12,6 @@ class SignUpView(CreateView):
     template_name = 'register.html'
     success_url = reverse_lazy('home')
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        login(self.request, self.object)
-        messages.success(self.request, "Successfully registered. Welcome!")
-        return response
-
 class PetOwnerListView(ListView):
     model = PetOwner
     context_object_name = "owner_list"
