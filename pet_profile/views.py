@@ -1,21 +1,26 @@
 from django.contrib.auth import login
 from django.contrib import messages
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, FormView, CreateView
+from django.views.generic import ListView, DetailView, FormView
+from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
 from pet_profile.forms import PhotoUploadForm, SignUpForm
+from django.views.generic.detail import SingleObjectMixin
 
 class SignUpView(CreateView):
     form_class = SignUpForm
     template_name = 'register.html'
     success_url = reverse_lazy('home')
 
-class PetOwnerListView(ListView):
+class PetOwnerListView(SingleObjectMixin, ListView):
     model = PetOwner
     context_object_name = "owner_list"
     template_name = "home.html"
+    #return HttpResponseRedirect(
+    #        reverse("author-detail", kwargs={"pk": self.object.pk})
+    #    )
 
 # does this need a view?    
 def pet_gallery(request):

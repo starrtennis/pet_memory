@@ -23,7 +23,7 @@ ANIMALTYPE_CHOICES = (
 class PetPhoto(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
-    photo = models.ImageField(blank = False, upload_to='media')
+    photo = models.ImageField(blank = False, upload_to='media/')
 
     def __str__(self):
         return self.title
