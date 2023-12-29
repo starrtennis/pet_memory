@@ -27,9 +27,9 @@ class PetPhotoTestCase(TestCase):
         return self.p_ph.title
     
     def test_doc_string(self):
-        self.assertEqual(self.get_docstring_1(), self.get_docstring_2())
-        self.assertEqual(self.get_docstring_1(), self.get_docstring_3())
-        self.assertEqual(self.get_docstring_2(), self.get_docstring_3())
-        self.assertEqual(self.get_docstring_1(), self.get_docstring_1())
-        self.assertEqual(self.get_docstring_2(), self.get_docstring_2())
-        self.assertEqual(self.get_docstring_3(), self.get_docstring_3())
+        self.assertNotEqual(self.get_docstring_1(), self.get_docstring_2()) #object != docstring of object
+        self.assertNotEqual(self.get_docstring_1(), self.get_docstring_3()) #object != "title" field of of object
+        self.assertEqual(self.get_docstring_2(), self.get_docstring_3())    #docstring of object == "title" field of object
+        self.assertEqual(self.get_docstring_1(), self.get_docstring_1())    # self-check (calibrator) #1
+        self.assertEqual(self.get_docstring_2(), self.get_docstring_2())    # self-check (calibrator) #2
+        self.assertEqual(self.get_docstring_3(), self.get_docstring_3())    # self-check (calibrator) #3
