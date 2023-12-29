@@ -1,36 +1,35 @@
 from django.contrib.auth import login
 from django.contrib import messages
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, FormView, CreateView
+from django.views.generic import ListView, DetailView, FormView
+from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
 from pet_profile.forms import PhotoUploadForm, SignUpForm
+from django.views.generic.detail import SingleObjectMixin
 
 class SignUpView(CreateView):
     form_class = SignUpForm
     template_name = 'register.html'
     success_url = reverse_lazy('home')
 
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        login(self.request, self.object)
-        messages.success(self.request, "Successfully registered. Welcome!")
-        return response
-
-class PetOwnerListView(ListView):
+class PetOwnerListView(SingleObjectMixin, ListView):
     model = PetOwner
     context_object_name = "owner_list"
     template_name = "home.html"
+    #return HttpResponseRedirect(
+    #        reverse("author-detail", kwargs={"pk": self.object.pk})
+    #    )
 
-    
-# def all_pet_photos(request):
-#     pets = Pet.objects.all()
-#     pet_data = {}
-#     for pet in pets:
-#         pet_data[pet] = PetPhoto.objects.filter(pets=pet)
-#     context = {'pet_data': pet_data}
-#     return render(request, 'pet_owner_profile.html', context)
+# does this need a view?    
+def pet_gallery(request):
+    pets = Pet.objects.all()
+    pet_data = {}
+    for pet in pets:
+        pet_data[pet] = PetPhoto.objects.filter(pets=pet)
+    context = {'pet_data': pet_data}
+    return render(request, 'pet_owner_profile.html', context)
 
 class PetOwnerDetailView(DetailView):
     model = PetOwner

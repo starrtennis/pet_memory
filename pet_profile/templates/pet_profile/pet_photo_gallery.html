@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+	{% for pet_photo in pet_photos %}
+		<img src="{{ pet_photo.url }}">
+    {% endfor %}
+{% endblock %}

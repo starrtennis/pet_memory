@@ -23,7 +23,7 @@ ANIMALTYPE_CHOICES = (
 class PetPhoto(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
-    photo = models.ImageField(blank = False, upload_to='media')
+    photo = models.ImageField(blank = False, upload_to='media/')
 
     def __str__(self):
         return self.title
@@ -36,7 +36,6 @@ class Pet(models.Model):
     age = models.PositiveIntegerField()
     pet_photos = models.ForeignKey(PetPhoto, null=True, blank=True, on_delete=models.CASCADE)
     #pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)#change the many to many location to PetPhoto, so it can access Pet, which is already defined
-    #I don't understand why this code is interpreted instead of compiled
     #pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)#same here
 
     # def save(self, *args, **kwargs):
