@@ -15,26 +15,21 @@ class GeneralTestCase(TestCase):
         self.assertGreater(1,0)
 
 class PetPhotoTestCase(TestCase):
-    def init_PetPhoto(self):
-        p_ph = PetPhoto()
-        return p_ph
+    p_ph = PetPhoto()
     
     def get_docstring_1(self):
-        p_ph = init_PetPhoto(self)
-        return p_ph
+        return self.p_ph
         
     def get_docstring_2(self):
-        p_ph = init_PetPhoto(self)
-        return p_ph.__str__(self)
+        return self.p_ph.__str__()
         
     def get_docstring_3(self):
-        p_ph = init_PetPhoto(self)
-        return p_ph.title
+        return self.p_ph.title
     
     def test_doc_string(self):
-        self.assertEqual(get_docstring_1(self), get_docstring_2(self))
-        self.assertEqual(get_docstring_1(self), get_docstring_3(self))
-        self.assertEqual(get_docstring_2(self), get_docstring_3(self))
-        self.assertEqual(get_docstring_1(self), get_docstring_1(self))
-        self.assertEqual(get_docstring_2(self), get_docstring_2(self))
-        self.assertEqual(get_docstring_3(self), get_docstring_3(self))
+        self.assertEqual(self.get_docstring_1(), self.get_docstring_2())
+        self.assertEqual(self.get_docstring_1(), self.get_docstring_3())
+        self.assertEqual(self.get_docstring_2(), self.get_docstring_3())
+        self.assertEqual(self.get_docstring_1(), self.get_docstring_1())
+        self.assertEqual(self.get_docstring_2(), self.get_docstring_2())
+        self.assertEqual(self.get_docstring_3(), self.get_docstring_3())
