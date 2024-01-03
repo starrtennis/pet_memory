@@ -61,10 +61,15 @@ class PetPhotoUploadView(CreateView):
     template_name = "photo_upload.html"
     form_class = PhotoUploadForm
 
-
+#both methods of context object filling/informing should work, but only one is necessary
+# how to choose which one to use?
 class PetPhotoListView(ListView):
     model = PetPhoto
-    context_object_name = "pet_photo_list"
+    #context_object_name = "pet_photo_list"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pet_photos"] = PetPhoto.objects.all()
+        return context
     template_name = "pet_photo_gallery.html"
 
 
