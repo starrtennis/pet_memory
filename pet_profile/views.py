@@ -22,7 +22,8 @@ class PetOwnerListView(SingleObjectMixin, ListView):
     #        reverse("author-detail", kwargs={"pk": self.object.pk})
     #    )
 
-# does this need a view?    
+# does this need a view?  
+"""  
 def pet_gallery(request):
     pets = Pet.objects.all()
     pet_data = {}
@@ -30,6 +31,7 @@ def pet_gallery(request):
         pet_data[pet] = PetPhoto.objects.filter(pets=pet)
     context = {'pet_data': pet_data}
     return render(request, 'pet_owner_profile.html', context)
+    """
 
 class PetOwnerDetailView(DetailView):
     model = PetOwner
@@ -63,6 +65,7 @@ class PetPhotoUploadView(CreateView):
 class PetPhotoListView(ListView):
     model = PetPhoto
     context_object_name = "pet_photo_list"
+    template_name = "pet_photo_gallery.html"
 
 
 class PetPhotoDetailView(DetailView):
