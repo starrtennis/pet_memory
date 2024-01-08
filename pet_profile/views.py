@@ -14,12 +14,7 @@ class SignUpView(CreateView):
     template_name = 'register.html'
     success_url = reverse_lazy('home')
 
-class PetOwnerListView(SingleObjectMixin, ListView):
-    model = PetOwner
-    context_object_name = "owner_list"
-    template_name = "home.html"
-
-class PetOwnerDetailView(DetailView):
+class ProfileView(DetailView):
     model = PetOwner
     context_object_name = "owner"
     template_name = "pet_owner_profile.html"
@@ -31,36 +26,25 @@ class PetOwnerDetailView(DetailView):
             pet_data[pet] = PetPhoto.objects.filter(pet=pet) #Why do I have to inform the context? Why cannot access directly as needed?
         context['pet_data'] = pet_data
         return context
+        
+class ProfileListView(SingleObjectMixin, ListView):
+    model = PetOwner
+    context_object_name = "owner_list"
+    template_name = "home.html"
+        
+class ImageView(DetailView):
+    model = PetPhoto
+    context_object_name = "pet_photo"
 
-class PetListView(ListView):
-    model = Pet
-    context_object_name = "pet_list"
-
-class PetDetailView(DetailView):
-    model = Pet
-    context_object_name = "pet"
-
-class PetPhotoUploadView(CreateView):
+class ImageUploadView(CreateView):
     template_name = "photo_upload.html"
     form_class = PhotoUploadForm
-
-class PetPhotoListView(ListView):
+    
+class ImageListView(ListView):
     model = PetPhoto
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pet_photos"] = PetPhoto.objects.all()
         return context
     template_name = "pet_photo_gallery.html"
-
-class PetPhotoDetailView(DetailView):
-    model = PetPhoto
-    context_object_name = "pet_photo"
-
-class PetStoryListView(ListView):
-    model = PetStory
-    context_object_name = "pet_story_list"
-
-class PetStoryDetailView(DetailView):
-    model = PetStory
-    context_object_name = "pet_story"
   
