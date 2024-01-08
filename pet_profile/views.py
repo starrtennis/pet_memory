@@ -1,13 +1,13 @@
-from django.contrib.auth import login
 from django.contrib import messages
+from django.contrib.auth import login
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, FormView
+from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-
 from pet_profile.models import PetOwner, Pet, PetPhoto, PetStory
 from pet_profile.forms import PhotoUploadForm, SignUpForm
-from django.views.generic.detail import SingleObjectMixin
+
 
 class SignUpView(CreateView):
     form_class = SignUpForm
@@ -18,20 +18,6 @@ class PetOwnerListView(SingleObjectMixin, ListView):
     model = PetOwner
     context_object_name = "owner_list"
     template_name = "home.html"
-    #return HttpResponseRedirect(
-    #        reverse("author-detail", kwargs={"pk": self.object.pk})
-    #    )
-
-# does this need a view?  
-"""  
-def pet_gallery(request):
-    pets = Pet.objects.all()
-    pet_data = {}
-    for pet in pets:
-        pet_data[pet] = PetPhoto.objects.filter(pets=pet)
-    context = {'pet_data': pet_data}
-    return render(request, 'pet_owner_profile.html', context)
-    """
 
 class PetOwnerDetailView(DetailView):
     model = PetOwner
@@ -46,44 +32,33 @@ class PetOwnerDetailView(DetailView):
         context['pet_data'] = pet_data
         return context
 
-
 class PetListView(ListView):
     model = Pet
     context_object_name = "pet_list"
-
 
 class PetDetailView(DetailView):
     model = Pet
     context_object_name = "pet"
 
-
 class PetPhotoUploadView(CreateView):
     template_name = "photo_upload.html"
     form_class = PhotoUploadForm
 
-# Both methods of context object filling/informing should work, but only one is necessary;
-# how to choose which one to use?
 class PetPhotoListView(ListView):
     model = PetPhoto
-    #context_object_name = "pet_photo_list"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pet_photos"] = PetPhoto.objects.all()
         return context
     template_name = "pet_photo_gallery.html"
-# images not showing at localhost:8000/pet_gallery/ when project is running
-# why?
-
 
 class PetPhotoDetailView(DetailView):
     model = PetPhoto
     context_object_name = "pet_photo"
 
-
 class PetStoryListView(ListView):
     model = PetStory
     context_object_name = "pet_story_list"
-
 
 class PetStoryDetailView(DetailView):
     model = PetStory
