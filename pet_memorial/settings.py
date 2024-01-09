@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
     #own modules
     'pet_profile',
-    'petGallery',
 ]
 
 # Static files (CSS, JavaScript, Images)
