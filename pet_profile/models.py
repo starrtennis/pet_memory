@@ -1,5 +1,4 @@
 import uuid
-
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
@@ -17,7 +16,7 @@ ANIMALTYPE_CHOICES = (
     ('fish', 'the one that swims'),
     ('frog', 'the one that croaks'),
     ('other', 'other')
-) #figure out how user enters their own pet type #probably define a function that accepts input of some sort to do that
+) #figure out how user enters their own pet type (probably define a function that accepts input of some sort to do that)
 
 
 class PetPhoto(models.Model):
@@ -36,19 +35,19 @@ class Pet(models.Model):
     age = models.PositiveIntegerField()
     pet_photos = models.ForeignKey(PetPhoto, null=True, blank=True, on_delete=models.CASCADE)
     #pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)#change the many to many location to PetPhoto, so it can access Pet, which is already defined
-    #pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)#same here
+    pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)
 
-    # def save(self, *args, **kwargs):
-    #     slug_save(self)
-    #     get_ID(self)
-    #     return super().save(*args, **kwargs)
+     def save(self, *args, **kwargs):
+         slug_save(self)
+         get_ID(self)
+         return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
 
 class CustomUserManager(BaseUserManager):
-    """To use email instead of username"""
+    """To use email instead of username""" #quando repario?
 
     def create_user(self, email, password, **extra_fields):
         if not email:
@@ -118,6 +117,6 @@ def slug_save(obj):
             if slug_is_wrong:
                 # create another slug and check it again
                 obj.slug = get_random_string(5)
-
-
-    
+                
+def mute_neighbors_function(neighbor_list): #allow others to be silent
+    yield
