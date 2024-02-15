@@ -99,24 +99,23 @@ class PetStory(models.Model):
 
     class Meta:
         verbose_name_plural = "PetStories"
-
-###Utility functions###
-def slug_save(obj):
-    """ A function to generate a 5 character slug and see if it has been used and contains naughty words."""
-    if not obj.slug: # if there isn't a slug
-        obj.slug = get_random_string(5) # create one
-        slug_is_wrong = True  
-        while slug_is_wrong: # keep checking until we have a valid slug
-            slug_is_wrong = False
-            other_objs_with_slug = type(obj).objects.filter(slug=obj.slug)
-            if len(other_objs_with_slug) > 0:
-                # if any other objects have current slug
-                slug_is_wrong = True
-            #if predict(obj.slug):
-            #    slug_is_wrong = True
-            if slug_is_wrong:
-                # create another slug and check it again
-                obj.slug = get_random_string(5)
+        
+    def slug_save(obj):
+        """ A function to generate a 5 character slug and see if it has been used and contains naughty words."""
+        if not obj.slug: # if there isn't a slug
+            obj.slug = get_random_string(5) # create one
+            slug_is_wrong = True  
+            while slug_is_wrong: # keep checking until we have a valid slug
+                slug_is_wrong = False
+                other_objs_with_slug = type(obj).objects.filter(slug=obj.slug)
+                if len(other_objs_with_slug) > 0:
+                    # if any other objects have current slug
+                    slug_is_wrong = True
+                #if predict(obj.slug):
+                #    slug_is_wrong = True
+                if slug_is_wrong:
+                    # create another slug and check it again
+                    obj.slug = get_random_string(5)
                 
-def mute_neighbors_function(neighbor_list): #allow others to be silent
-    yield
+    def mute_neighbors_function(neighbor_list): #allow others to be silent
+        yield
