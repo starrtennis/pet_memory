@@ -47,7 +47,7 @@ class Pet(models.Model):
 
 
 class CustomUserManager(BaseUserManager):
-    """To use email instead of username""" #quando repario?
+    """To use email instead of username""" 
 
     def create_user(self, email, password, **extra_fields):
         if not email:
