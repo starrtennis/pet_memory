@@ -7,6 +7,11 @@ class SanityTestCase(TestCase):
     def test_boolean_logic(self):
         self.assertEqual(True, True)
         self.assertEqual(False, False)
-        self.assertEqual(False, True) #test short circuits here on failure; how to test both invalid assertions?
+        self.assertEqual(False, True) #test short circuits here on failure; how to test all invalid assertions?
         self.assertEqual(True, False)
+        
+        self.assertTrue(True)
+        self.assertTrue(False)
+        self.assertFalse(False)
+        self.assertFalse(True)
         
