@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     #3rd parties
     'bootstrap5',
     'compressor',
-    'TextAccessibility'
 
     #own modules
     'pet_profile'
