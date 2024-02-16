@@ -6,46 +6,6 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 
-ANIMALTYPE_CHOICES = (
-    ('dog', 'the one that barks'),
-    ('cat', 'the one that meows'),
-    ('lizard', 'the one that eats crickets'),
-    ('snake', 'the one that slithers'),
-    ('rabbit/bunny', 'the one that hops'),
-    ('bird', 'the one that flaps'),
-    ('fish', 'the one that swims'),
-    ('frog', 'the one that croaks'),
-    ('other', 'other')
-) #figure out how user enters their own pet type (probably define a function that accepts input of some sort to do that)
-
-
-class PetPhoto(models.Model):
-    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
-    title = models.CharField(max_length = 255)
-    photo = models.ImageField(blank = False, upload_to='media')
-
-    def __str__(self):
-        return self.title
-
-
-class Pet(models.Model):
-    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
-    name = models.CharField(max_length = 255, unique = False)
-    animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
-    age = models.PositiveIntegerField()
-    pet_photos = models.ForeignKey(PetPhoto, null=True, blank=True, on_delete=models.CASCADE)
-    #pet_photos = models.ManyToManyField(PetPhoto, related_name = "pets", blank = True)#change the many to many location to PetPhoto, so it can access Pet, which is already defined
-    pet_stories = models.ManyToManyField(PetStory, related_name = "pets", blank = True)
-
-     def save(self, *args, **kwargs):
-         slug_save(self)
-         get_ID(self)
-         return super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.name
-
-
 class CustomUserManager(BaseUserManager):
     """To use email instead of username""" 
 
@@ -68,13 +28,11 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
         return self.create_user(email, password, **extra_fields)
 
-
 class PetOwner(AbstractUser):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(blank=True, max_length = 255)
     profile_photo = models.ImageField(blank=True)
-    pets = models.ForeignKey(Pet, null=True, blank=True, related_name = "Owners", on_delete=models.CASCADE)
     objects = CustomUserManager()
 
     def get_absolute_url(self):
@@ -87,6 +45,33 @@ class PetOwner(AbstractUser):
     def __str__(self):
         return self.first_name
 
+ANIMALTYPE_CHOICES = (
+    ('dog', 'the one that barks'),
+    ('cat', 'the one that meows'),
+    ('lizard', 'the one that eats crickets'),
+    ('snake', 'the one that slithers'),
+    ('rabbit/bunny', 'the one that hops'),
+    ('bird', 'the one that flaps'),
+    ('fish', 'the one that swims'),
+    ('frog', 'the one that croaks'),
+    ('other', 'other')
+) #figure out how user enters their own pet type (probably define a function that accepts input of some sort to do that)
+
+class Pet(models.Model):
+    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
+    name = models.CharField(max_length = 255, unique = False)
+    animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
+    age = models.PositiveIntegerField()
+    models.ManyToManyField(PetOwner)
+
+
+    def save(self, *args, **kwargs):
+         slug_save(self)
+         get_ID(self)
+         return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
 class PetStory(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
@@ -119,3 +104,12 @@ class PetStory(models.Model):
                 
     def mute_neighbors_function(neighbor_list): #allow others to be silent
         yield
+        
+class PetPhoto(models.Model):
+    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
+    title = models.CharField(max_length = 255)
+    photo = models.ImageField(blank = False, upload_to='media')
+    pets = models.ManyToManyField(Pet)
+
+    def __str__(self):
+        return self.title
