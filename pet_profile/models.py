@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 
-class CustomUserManager(BaseUserManager):
+class CustomUserManager(models.BaseUserManager):
     """To use email instead of username""" 
 
     def create_user(self, email, password, **extra_fields):
@@ -28,7 +28,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
         return self.create_user(email, password, **extra_fields)
 
-class PetOwner(AbstractUser):
+class PetOwner(models.AbstractUser):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(blank=True, max_length = 255)
