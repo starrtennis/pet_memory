@@ -29,7 +29,7 @@ def pet_gallery(request):
     for pet in pets:
         pet_data[pet] = PetPhoto.objects.filter(pets=pet)
     context = {'pet_data': pet_data}
-    return render(request, 'pet_owner_profile.html', context)
+    return render(request, 'pet_photo_gallery.html', context)
 
 class PetOwnerDetailView(DetailView):
     model = PetOwner
