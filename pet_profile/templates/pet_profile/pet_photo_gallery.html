@@ -2,6 +2,6 @@
 {% load static %}
 {% block content %}
 	{% for pet_photo in pet_photos %}
-		<img src="{{ pet_photo.url }}">
+		<div class="col-lg-4 col-xs-6 thumbnail"><img src="{{ pet_photo.url }}"></div>
     {% endfor %}
 {% endblock %}
