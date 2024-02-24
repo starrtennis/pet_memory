@@ -1,9 +1,13 @@
 from django.views.generic import TemplateView
+<<<<<<< HEAD
 from pet_profile.models import Pet, PetOwner, PetPhoto
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 import datetime
 import PIL.Image as Image
+=======
+from pet_profile.models import PetOwner, PetPhoto, PetStory
+>>>>>>> 98f895b806171439f734c6c695dc81f1d7920c07
 
 class HomeView(TemplateView):
     template_name = "home.html"
@@ -12,6 +16,7 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['pet_owners'] = PetOwner.objects.all()
         context['pet_photos'] = PetPhoto.objects.all()
+        context['pet_stories'] = PetStory.objects.all()
         return context
     
 def pet_gallery(request):

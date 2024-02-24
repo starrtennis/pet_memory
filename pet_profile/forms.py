@@ -21,5 +21,5 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2', 'location', 'age', 'first_name', 'last_name')
 
 
-class UpdateForm(forms.Form):
+class UpdateForm(SignUpForm): #all done
     pass

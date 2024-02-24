@@ -1,0 +1,5 @@
+Bootstrap for Pet Memory:
+-no gutters
+-responsive design--xs before small before medium before large etc.
+-gallery images should have margins (background color--see color theme notes)
+-don't make it look "Hollywood"
