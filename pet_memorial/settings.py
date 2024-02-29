@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'compressor',
 
     #own modules
-    'pet_profile'
+    'pet_profile',
 ]
 
 # Static files (CSS, JavaScript, Images)

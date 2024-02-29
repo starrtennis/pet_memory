@@ -2,6 +2,10 @@
 {% load static %}
 {% block content %}
 	{% for pet_photo in pet_photos %}
+<<<<<<< HEAD
 		<div class="col-lg-4 col-xs-6 thumbnail"><img src="{{ pet_photo.url }}"></div>
+=======
+		<img src="{{ pet_photo.photo.url }}">
+>>>>>>> 3306d66448dfed1c16ea3215231ab6b7f0857389
     {% endfor %}
 {% endblock %}

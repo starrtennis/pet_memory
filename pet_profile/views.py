@@ -22,14 +22,20 @@ class PetOwnerListView(SingleObjectMixin, ListView):
     #        reverse("author-detail", kwargs={"pk": self.object.pk})
     #    )
 
-# does this need a view?    
+# does this need a view?  
+"""  
 def pet_gallery(request):
     pets = Pet.objects.all()
     pet_data = {}
     for pet in pets:
         pet_data[pet] = PetPhoto.objects.filter(pets=pet)
     context = {'pet_data': pet_data}
+<<<<<<< HEAD
     return render(request, 'pet_photo_gallery.html', context)
+=======
+    return render(request, 'pet_owner_profile.html', context)
+    """
+>>>>>>> 3306d66448dfed1c16ea3215231ab6b7f0857389
 
 class PetOwnerDetailView(DetailView):
     model = PetOwner
@@ -59,10 +65,18 @@ class PetPhotoUploadView(CreateView):
     template_name = "photo_upload.html"
     form_class = PhotoUploadForm
 
-
+# Both methods of context object filling/informing should work, but only one is necessary;
+# how to choose which one to use?
 class PetPhotoListView(ListView):
     model = PetPhoto
-    context_object_name = "pet_photo_list"
+    #context_object_name = "pet_photo_list"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["pet_photos"] = PetPhoto.objects.all()
+        return context
+    template_name = "pet_photo_gallery.html"
+# images not showing at localhost:8000/pet_gallery/ when project is running
+# why?
 
 
 class PetPhotoDetailView(DetailView):
