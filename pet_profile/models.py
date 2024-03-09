@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
 
+
 class CustomUserManager(BaseUserManager):
     """To use email instead of username""" 
 
@@ -62,8 +63,7 @@ class Pet(models.Model):
     name = models.CharField(max_length = 255, unique = False)
     animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
     age = models.PositiveIntegerField()
-    models.ManyToManyField(PetOwner)
-
+    owners = models.ManyToManyField(PetOwner)
 
     def save(self, *args, **kwargs):
          slug_save(self)
