@@ -1,0 +1,40 @@
+body {
+    /* color: red; */
+}
+
+h1 {
+    color: brown;
+}
+
+h2 {
+    color: #003eaacf;
+}
+
+.owner-img {
+    max-width: 250px;
+    max-height: 250px;
+    img {
+        width: -webkit-fill-available;
+    }
+}
+
+.header-img {
+    max-width: 45%;
+    margin-left: 15px;
+}
+
+.header-tittle {
+    font-family: 'ingrid darling';
+    color: wheat;
+    font-size: 50px;
+    position: relative;
+    right: 10px;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.justify-content-end{
+	text-align:right;
+}

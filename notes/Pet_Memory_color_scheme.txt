@@ -1,0 +1,34 @@
+- Tailwind
+
+{ 'seal_brown': { DEFAULT: '#5d2b14', 100: '#130904', 200: '#251108', 300: '#381a0c', 400: '#4a2210', 500: '#5d2b14', 600: '#9e4922', 700: '#d56b3a', 800: '#e39c7c', 900: '#f1cebd' }, 'desert_sand': { DEFAULT: '#ebc5aa', 100: '#41240f', 200: '#83481f', 300: '#c46c2e', 400: '#db9767', 500: '#ebc5aa', 600: '#efd0ba', 700: '#f3dccb', 800: '#f7e7dc', 900: '#fbf3ee' }, 'wheat': { DEFAULT: '#f5deb3', 100: '#4b340a', 200: '#966813', 300: '#e19c1d', 400: '#ebbd67', 500: '#f5deb3', 600: '#f7e4c2', 700: '#f9ebd1', 800: '#fbf2e0', 900: '#fdf8f0' }, 'old_gold': { DEFAULT: '#d6bc28', 100: '#2b2608', 200: '#564c10', 300: '#817118', 400: '#ac9720', 500: '#d6bc28', 600: '#dfca53', 700: '#e7d77e', 800: '#efe5a9', 900: '#f7f2d4' }, 'tawny': { DEFAULT: '#d25e15', 100: '#2a1304', 200: '#542508', 300: '#7d380c', 400: '#a74a11', 500: '#d25e15', 600: '#eb7933', 700: '#f09b66', 800: '#f5bc99', 900: '#fadecc' }, 'eerie_black': { DEFAULT: '#212529', 100: '#070808', 200: '#0e0f11', 300: '#141719', 400: '#1b1f22', 500: '#212529', 600: '#49525b', 700: '#6f7d8b', 800: '#9fa8b2', 900: '#cfd4d8' } }
+
+- CSV
+
+5d2b14,ebc5aa,f5deb3,d6bc28,d25e15,212529
+
+- With #
+
+#5d2b14, #ebc5aa, #f5deb3, #d6bc28, #d25e15, #212529
+
+- Array
+
+["5d2b14","ebc5aa","f5deb3","d6bc28","d25e15","212529"]
+
+- Object
+
+{"Seal brown":"5d2b14","Desert sand":"ebc5aa","Wheat":"f5deb3","Old gold":"d6bc28","Tawny":"d25e15","Eerie black":"212529"}
+
+- Extended Array
+
+[{"name":"Seal brown","hex":"5d2b14","rgb":[93,43,20],"cmyk":[0,54,78,64],"hsb":[19,78,36],"hsl":[19,65,22],"lab":[24,21,25]},{"name":"Desert sand","hex":"ebc5aa","rgb":[235,197,170],"cmyk":[0,16,28,8],"hsb":[25,28,92],"hsl":[25,62,79],"lab":[82,10,19]},{"name":"Wheat","hex":"f5deb3","rgb":[245,222,179],"cmyk":[0,9,27,4],"hsb":[39,27,96],"hsl":[39,77,83],"lab":[89,2,24]},{"name":"Old gold","hex":"d6bc28","rgb":[214,188,40],"cmyk":[0,12,81,16],"hsb":[51,81,84],"hsl":[51,69,50],"lab":[76,-5,71]},{"name":"Tawny","hex":"d25e15","rgb":[210,94,21],"cmyk":[0,55,90,18],"hsb":[23,90,82],"hsl":[23,82,45],"lab":[54,42,58]},{"name":"Eerie black","hex":"212529","rgb":[33,37,41],"cmyk":[20,10,0,84],"hsb":[210,20,16],"hsl":[210,11,15],"lab":[14,-1,-3]}]
+
+- XML
+
+<palette>
+  <color name="Seal brown" hex="5d2b14" r="93" g="43" b="20" />
+  <color name="Desert sand" hex="ebc5aa" r="235" g="197" b="170" />
+  <color name="Wheat" hex="f5deb3" r="245" g="222" b="179" />
+  <color name="Old gold" hex="d6bc28" r="214" g="188" b="40" />
+  <color name="Tawny" hex="d25e15" r="210" g="94" b="21" />
+  <color name="Eerie black" hex="212529" r="33" g="37" b="41" />
+</palette>

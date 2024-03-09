@@ -15,3 +15,4 @@ class SanityTestCase(TestCase):
         self.assertFalse(False)
         self.assertFalse(True)
         
+    #look at Django class TransactionTestCase.

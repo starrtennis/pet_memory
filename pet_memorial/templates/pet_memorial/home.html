@@ -26,4 +26,8 @@
 	{% for pet_photo in pet_photos %}
 		<img src="{{ pet_photo.url }}">
     {% endfor %}
+	{% for pet_story in pet_stories %}
+		{{ pet_story }}
+		{{ pet_story.content }}
+	{% endfor %}
 {% endblock %}
