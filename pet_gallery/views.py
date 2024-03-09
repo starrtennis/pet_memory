@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+# We need a view is needed to route HTTP traffic from home
+# page to appropriate gallery section(s).
+# s
