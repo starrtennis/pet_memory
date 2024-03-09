@@ -14,14 +14,14 @@ no account
 
 use django data storage methods
 
-+ combine best componenets of pet memorial and mypet, easier and more efficient to code
++ combine best componenets of pet memorial and mypet, easier and more efficient to code [?]
 
 design before code
 
 figma?
 or just paper and pencil
 
-.gitignore file contains entry for virtual environments (good!)
+---.gitignore file contains entry for virtual environments (good!)---
 
 efficiency gains in code noticed but not identified specifically
 
@@ -32,6 +32,7 @@ held out on migration and migration application until local local personal branc
 static compress / static_compress? (biomedical engineering? systems engineering?)
 + figure out redis
 improve appearances, but only if genuine concern (sophisticated requisition)
+^^^always improve appearances[?], whether concerned or not^^^
 
 let's migrate! (and apply migrations)
 
@@ -52,7 +53,7 @@ pet owner and pet photo models reference  "custom user manager"
 + ? querying duckduckgo
 seems to be planning for future progress on project authentication features & functions
 functions and features?
-whatever...
+whatever... <<<
 
 classified as backend coding
 
@@ -74,3 +75,11 @@ per-site cache
 + to prevent secret key leak, figure out how to store constant variable in separate file, and then how to reference it (some duckduckgo may be required)
 + update version of pip
 + install memcached (?)
+
+user nodes
+permission nodes
+
+pass-thru applications
+anonymous log in: username: Anonymous password: Anonymous (leave instructions on FAQ)
+FAQ
+language-agnosticity (see TextAccessibility plugin [?])
