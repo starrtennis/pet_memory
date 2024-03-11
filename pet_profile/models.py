@@ -1,4 +1,3 @@
-import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
@@ -8,7 +7,7 @@ from django.utils.crypto import get_random_string
 
 
 class CustomUserManager(BaseUserManager):
-    """To use email instead of username""" 
+    """To use email instead of username.""" 
 
     def create_user(self, email, password, **extra_fields):
         if not email:
@@ -68,7 +67,7 @@ class Pet(models.Model):
     def save(self, *args, **kwargs):
          slug_save(self)
          get_ID(self)
-         return super().save(*args, **kwargs)
+         return save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -86,7 +85,7 @@ class PetStory(models.Model):
         verbose_name_plural = "PetStories"
         
     def slug_save(obj):
-        """ A function to generate a 5 character slug and see if it has been used and contains naughty words."""
+        """ A function to generate a 5 character slug and see if it has been used."""
         if not obj.slug: # if there isn't a slug
             obj.slug = get_random_string(5) # create one
             slug_is_wrong = True  

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import PetOwner
+from .models import PetOwner, PetPhoto
 
 
 class PhotoUploadForm(forms.Form):
@@ -21,5 +21,5 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2', 'location', 'age', 'first_name', 'last_name')
 
 
-class UpdateForm(SignUpForm): #all done
+class UpdateForm(SignUpForm):
     pass
