@@ -15,10 +15,11 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
     location = forms.CharField(max_length=255, required=True)
     age = forms.IntegerField(required=True)
+    profile_photo = forms.ImageField(required=True) #required should be true according to design specs, but it is not detecting non detectar the image even when it is selected state by file browser (after apres Durant Durant)
 
     class Meta:
         model = PetOwner
-        fields = ('username', 'email', 'password1', 'password2', 'location', 'age', 'first_name', 'last_name')
+        fields = ('username', 'email', 'password1', 'password2', 'location', 'age', 'first_name', 'last_name', 'profile_photo')
 
 
 class UpdateForm(SignUpForm):

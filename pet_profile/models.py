@@ -9,10 +9,12 @@ from django.utils.crypto import get_random_string
 class CustomUserManager(BaseUserManager):
     """To use email instead of username.""" 
 
-    def create_user(self, email, password, **extra_fields):
+    def create_user(self, email, password, profile_photo, **extra_fields):
         if not email:
             raise ValueError('Email is required')
         email = self.normalize_email(email)
+        if not profile_photo:
+            raise ValueError('profile_photo is required') #profile photo upload not being detected non detectar
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()
@@ -32,7 +34,7 @@ class PetOwner(AbstractUser):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(blank=True, max_length = 255)
-    profile_photo = models.ImageField(blank=True)
+    profile_photo = models.ImageField(blank=False)
     objects = CustomUserManager()
 
     def get_absolute_url(self):
