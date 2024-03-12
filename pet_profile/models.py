@@ -34,7 +34,7 @@ class PetOwner(AbstractUser):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     age = models.PositiveIntegerField(null=True)
     location = models.CharField(blank=True, max_length = 255)
-    profile_photo = models.ImageField(blank=False)
+    profile_photo = models.ImageField(blank=False, upload_to="media/")
     objects = CustomUserManager()
 
     def get_absolute_url(self):
