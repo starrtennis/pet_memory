@@ -4,6 +4,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
+# import UUID
 
 
 class CustomUserManager(BaseUserManager):
@@ -58,11 +59,12 @@ ANIMALTYPE_CHOICES = (
     ('frog', 'the one that croaks'),
     ('other', 'other')
 ) #figure out how user enters their own pet type (probably define a function that accepts input of some sort to do that)
+# what sounds do animals make in Spanish? quelle sons les animalias conjure-t'ils ena la Espagnola?
 
 class Pet(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     name = models.CharField(max_length = 255, unique = False)
-    animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks")
+    animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks") #??
     age = models.PositiveIntegerField()
     owners = models.ManyToManyField(PetOwner)
 
@@ -102,15 +104,32 @@ class PetStory(models.Model):
                 if slug_is_wrong:
                     # create another slug and check it again
                     obj.slug = get_random_string(5)
+                    
+        ## this function would be more efficient using case/break statements instead of if/while statements
                 
-    def mute_neighbors_function(neighbor_list): #allow others to be silent
+      
+    def mute_neighbors_function(neighbor_list): #allow others to be silent #allow a los demás que guarden silencio
         yield
         
 class PetPhoto(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
-    photo = models.ImageField(blank = False, upload_to='media')
+    photo = models.ImageField(blank = False, upload_to='~/media/')
     pets = models.ManyToManyField(Pet)
 
     def __str__(self):
         return self.title
+        
+    def save():
+        slug = auto_slug()
+        
+    def auto_slug(uuid_type):
+        # create slug using uuid of passed-in type
+        # how to automate uuid_type selection?
+        # gooooood...
+        
+        # crear slug usando uuid de tipo pasado
+        # ¿Cómo automatizar uuid_type selección?
+        # bueno...
+    
+    

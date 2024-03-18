@@ -16,3 +16,8 @@ class SanityTestCase(TestCase):
         self.assertFalse(True)
         
     #look at Django class TransactionTestCase.
+    
+class PurchaseTestCase(TransactionTestCase):
+    # write docstring
+    # define variables
+    # pseudocode

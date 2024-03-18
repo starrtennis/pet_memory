@@ -1,6 +1,6 @@
 09Aug2023
 -----------
-Pet Memorial / MyPet website
+Pet Memorial / MyPet / PetMemo: website/webapp
 + people (users) post about their pet
 the pet has a profile
 people love teir pets so will drive traffic

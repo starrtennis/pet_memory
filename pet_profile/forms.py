@@ -19,7 +19,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = PetOwner
-        fields = ('username', 'email', 'password1', 'password2', 'location', 'age', 'first_name', 'last_name', 'profile_photo')
+        fields = ('username', 'email', 'password1', 'password2', 'location', 'age', 'first_name', 'last_name', 'profile_photo') #where are fields passed?
 
 
 class UpdateForm(SignUpForm):
