@@ -124,6 +124,7 @@ class PetPhoto(models.Model):
         slug = auto_slug()
         
     def auto_slug(uuid_type):
+        yield
         # create slug using uuid of passed-in type
         # how to automate uuid_type selection?
         # gooooood...
