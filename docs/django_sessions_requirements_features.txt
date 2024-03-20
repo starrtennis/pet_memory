@@ -61,13 +61,13 @@ def logout(request):
 
 
 
-Django doesn't provide automatic purging of expired sessions
-The session in database mode is automatically deleted if the user logs out manually. But if they just close their browser it doesn't.
+Django doesn't provide automatic purging of expired sessions --> with its API --> but you could write a function that does it
+The session in database mode is automatically deleted if the user logs out manually. But if they just close their browser it doesn't. --> see above line
 
-Note Log Out! when you're leaving a signed in website on your client browser
+Note Log Out! <--(?) when you're leaving a signed in website on your client browser
 
 Session Security
-cookies can be set for the whole domain from any subdomain
+cookies can be set for the whole domain from any subdomain --> oop way to restrict that?
 
 session data is stored in a database table named django_session
 

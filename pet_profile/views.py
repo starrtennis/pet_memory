@@ -27,6 +27,7 @@ class PetOwnerListView(SingleObjectMixin, ListView):
     #        reverse("author-detail", kwargs={"pk": self.object.pk})
     #    )
    
+   # this needs to be migrated to its own app
 def pet_gallery(request):
     pets = Pet.objects.all()
     pet_data = {}
