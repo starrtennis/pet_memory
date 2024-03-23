@@ -64,7 +64,6 @@ ANIMALTYPE_CHOICES = (
 class Pet(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     name = models.CharField(max_length = 255, unique = False)
-    animaltype = models.CharField(choices = ANIMALTYPE_CHOICES, max_length = 255, default="the one that barks") #??
     age = models.PositiveIntegerField()
     owners = models.ManyToManyField(PetOwner)
 
