@@ -3,6 +3,12 @@ from django.db import models
 # cannot copy pasta pet verbatim here
 # violates dry and also syntax errors
 
+# by "access" do you mean: create, read, write, open, or close?
+# prudent to set permissions upfront
+#
+#
+#
+
 class PetPhoto(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
     title = models.CharField(max_length = 255)
