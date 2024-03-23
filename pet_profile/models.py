@@ -4,6 +4,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.utils.crypto import get_random_string
+from pet_gallery import models
 # import UUID
 
 
@@ -47,19 +48,6 @@ class PetOwner(AbstractUser):
 
     def __str__(self):
         return self.first_name
-
-ANIMALTYPE_CHOICES = (
-    ('dog', 'the one that barks'),
-    ('cat', 'the one that meows'),
-    ('lizard', 'the one that eats crickets'),
-    ('snake', 'the one that slithers'),
-    ('rabbit/bunny', 'the one that hops'),
-    ('bird', 'the one that flaps'),
-    ('fish', 'the one that swims'),
-    ('frog', 'the one that croaks'),
-    ('other', 'other')
-) #figure out how user enters their own pet type (probably define a function that accepts input of some sort to do that)
-# what sounds do animals make in Spanish? quelle sons les animalias conjure-t'ils ena la Espagnola?
 
 class Pet(models.Model):
     slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
@@ -110,26 +98,5 @@ class PetStory(models.Model):
     def mute_neighbors_function(neighbor_list): #allow others to be silent #allow a los demás que guarden silencio
         yield
         
-class PetPhoto(models.Model):
-    slug = models.SlugField(max_length = 25, primary_key = True, blank = True, null=False)
-    title = models.CharField(max_length = 255)
-    photo = models.ImageField(blank = False, upload_to='~/media/')
-    pets = models.ManyToManyField(Pet)
 
-    def __str__(self):
-        return self.title
-        
-    def save():
-        slug = auto_slug()
-        
-    def auto_slug(uuid_type):
-        yield
-        # create slug using uuid of passed-in type
-        # how to automate uuid_type selection?
-        # gooooood...
-        
-        # crear slug usando uuid de tipo pasado
-        # ¿Cómo automatizar uuid_type selección?
-        # bueno...
-    
     
