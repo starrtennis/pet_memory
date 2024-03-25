@@ -83,3 +83,20 @@ pass-thru applications
 anonymous log in: username: Anonymous password: Anonymous (leave instructions on FAQ)
 FAQ
 language-agnosticity (see TextAccessibility plugin [?])
+
+
+
+
+
+---
+
+2024-03-24:
+		Possible to have no owner profile. Only pet. Keep app pet-centric.
+		(Requires remodeling).
+		
+		Es posible no tener perfil de propietario. Solo mascota.
+		Mantén la aplicación centrada en las mascotas.
+		(Requiere remodelación).
+		
+		Name: Pet Memory (already in logo)
+		rename app? (to Pet Memory) in github and files is correct/incorrect?
