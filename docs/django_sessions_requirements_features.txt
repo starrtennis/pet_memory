@@ -33,7 +33,7 @@ you can also write your own serializer (not recommended)
 examples
 
 def post_comment(request, new_comment):
-    if request.session.get("has_commented", False):
+    if request.session.get("has_commented", False): #may be backward
         return HttpResponse("You've already commented.")
     c = comments.Comment(comment=new_comment)
     c.save()
